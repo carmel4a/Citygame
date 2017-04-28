@@ -1,0 +1,107 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://UI/UI.gd" type="Script" id=1]
+[ext_resource path="res://Card/Card.tscn" type="PackedScene" id=2]
+
+[node name="UI" type="Control"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 1
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 6.0
+margin/top = 439.0
+margin/right = 376.0
+margin/bottom = 595.0
+scroll/horizontal = false
+scroll/vertical = true
+
+[node name="VButtonArray" type="VBoxContainer" parent="ScrollContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 370.0
+margin/bottom = 156.0
+alignment = 2
+
+[node name="Stats" type="Panel" parent="."]
+
+editor/display_folded = true
+anchor/right = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 1
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 38.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Button" type="Button" parent="Stats"]
+
+anchor/left = 2
+anchor/top = 3
+anchor/right = 1
+anchor/bottom = 3
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 0
+size_flags/vertical = 0
+margin/left = 0.920898
+margin/top = 10.0
+margin/right = 7.0
+margin/bottom = -10.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Next Turn"
+flat = false
+
+[node name="Label" type="Label" parent="Stats"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 12.0
+margin/top = 13.0
+margin/right = 116.0
+margin/bottom = 27.0
+text = "Decision Points: * (+/-x)"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="card" parent="." instance=ExtResource( 2 )]
+
+visibility/visible = false
+margin/left = 906.0
+margin/top = 43.0
+margin/right = 920.0
+margin/bottom = 57.0
+
+
