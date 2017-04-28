@@ -23,8 +23,13 @@ var _content = {\
 	}
 
 func _ready():
-	
+	print("Here ", self.get_name())
 	load_gd("_temp")
+	for i in _content["options"]:
+		var _b = get_node("VBoxContainer/VButtonArray/ButtonsGroup/Button").duplicate()
+		_b.set_text(_content["options"][i]["text"])
+		_b.show()
+		get_node("VBoxContainer/VButtonArray/ButtonsGroup").add_child(_b)
 	set_process_input(true)
 	set_process(true)
 	
@@ -32,6 +37,13 @@ func _process(delta):
 
 	if dragging == true:
 		set_pos(get_global_mouse_pos()-_clicked_pt)
+		
+func _init(what = null):
+	
+	if what != null:
+		_content["sys_name"] = what
+	else:
+		_content["sys_name"] = "_temp"
 
 func _on_close():
 	
@@ -55,6 +67,7 @@ func load_gd(name):
 	
 	var file = File.new()
 	file.open("res://Card/Cards/"+_content["sys_name"] +"/" +_content["sys_name"]+".json",1)
+	_content.clear()
 	_content.parse_json(file.get_as_text())
 	file.close()
 	_update()
@@ -62,12 +75,7 @@ func load_gd(name):
 func _update():
 	
 	set_size(Vector2(0,0))
-	for i in _content["options"]:
-		var _b = get_node("VBoxContainer/VButtonArray/ButtonsGroup/Button").duplicate()
-		_b.set_text(_content["options"][i]["text"])
-		_b.show()
-		get_node("VBoxContainer/VButtonArray/ButtonsGroup").add_child(_b)
-	
+
 func _on_Option_button_selected( button_idx ):
 	
 	print(button_idx)

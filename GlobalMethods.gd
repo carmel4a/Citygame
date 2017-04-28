@@ -4,6 +4,10 @@ onready var Game = get_node("/root/Game")
 onready var UI = get_node("/root/Game/CanvasLayer/UI")
 onready var Level = get_node("/root/Game/Level")
 
+func get_turn_no():
+	
+	return(Game.Turn)
+	
 func set_IP(v):
 	
 	UI._update(["Stats/Label"])

@@ -12,12 +12,16 @@ func _next_turn():
 
 	Turn += 1
 	acc_IP += dif_IP
-	generate_allerts()
+	generate_alerts()
 	
-func generate_allerts():
-
+func generate_alerts():
+	generate_alert("Init")
 	for i in range(randi()%2+1):
-		var _b = get_node("CanvasLayer/UI").TurnAlert.instance()
-		_b.show()
-		_b.set_text("Turn: "+ str(Turn))
-		get_node("CanvasLayer/UI/ScrollContainer/VButtonArray").add_child(_b)
+		generate_alert("Card")
+		
+
+func generate_alert(witch):
+	var _b = get_node("CanvasLayer/UI").TurnAlert.instance()
+	_b.type = witch
+	_b.show()
+	get_node("CanvasLayer/UI/ScrollContainer/VButtonArray").add_child(_b)

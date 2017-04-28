@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Camera/Camera.gd" type="Script" id=1]
 
-
 [node name="Camera" type="Camera2D"]
 
 anchor_mode = 1
@@ -22,5 +21,10 @@ drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
 script/script = ExtResource( 1 )
+key = true
+drag = true
+edge = false
+wheel = true
+zoom_out_limit = 100
 
 

@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=2 format=1]
 
 [ext_resource path="res://UI/UI.gd" type="Script" id=1]
-[ext_resource path="res://Card/Card.tscn" type="PackedScene" id=2]
 
 [node name="UI" type="Control"]
 
@@ -47,7 +46,6 @@ alignment = 2
 
 [node name="Stats" type="Panel" parent="."]
 
-editor/display_folded = true
 anchor/right = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -95,13 +93,5 @@ text = "Decision Points: * (+/-x)"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-
-[node name="card" parent="." instance=ExtResource( 2 )]
-
-visibility/visible = false
-margin/left = 906.0
-margin/top = 43.0
-margin/right = 920.0
-margin/bottom = 57.0
 
 

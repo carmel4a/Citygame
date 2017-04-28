@@ -14,6 +14,7 @@ script/script = ExtResource( 1 )
 
 [node name="Level" type="Node2D" parent="."]
 
+editor/display_folded = true
 script/script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -87,6 +88,7 @@ __meta__ = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -95,11 +97,5 @@ scale = Vector2( 1, 1 )
 [node name="UI" parent="CanvasLayer" instance=ExtResource( 6 )]
 
 [node name="Camera" parent="." instance=ExtResource( 7 )]
-
-key = true
-drag = true
-edge = false
-wheel = true
-zoom_out_limit = 100
 
 
