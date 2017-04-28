@@ -85,6 +85,7 @@ func _input_event(event):
 		if event.pressed:
 			if Rect2(Vector2(0,0),Vector2(129,25)).has_point(event.pos) and dragging == false:
 				accept_event()
+				raise()
 				dragging = true
 				_clicked_pt = get_local_mouse_pos()
 		else:
