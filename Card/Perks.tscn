@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://Card/Perks.gd" type="Script" id=1]
+
+[node name="Perks" type="GridContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 214.0
+margin/top = 0.0
+margin/right = 306.0
+margin/bottom = 197.0
+columns = 4
+script/script = ExtResource( 1 )
+
+

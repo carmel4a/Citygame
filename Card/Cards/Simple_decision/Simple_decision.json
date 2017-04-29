@@ -1,1 +1,1 @@
-{"image":"", "options":{"option2":{"tooltip":"You may buil more roas than houses", "text":"Road", "sys_name":"road"}, "option1":{"tooltip":"A House", "text":"House", "sys_name":"house"}}, "text":"You may choose between\n house and road", "sys_name":"Simple_decision", "title":"You decide!"}
+{"image":"", "options":{"option2":{"tooltip":"A road", "text":"Road", "sys_name":"road"}, "option1":{"tooltip":"You may buil more roas than houses", "text":"House", "sys_name":"house"}}, "text":"You may choose between\n house and road", "sys_name":"Simple_decision", "title":"You decide!"}

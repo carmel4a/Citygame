@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://Card/Card.gd" type="Script" id=1]
 [ext_resource path="res://UI/gui_helper.png" type="Texture" id=2]
+[ext_resource path="res://Card/Cards/_temp/_temp_option.gd" type="Script" id=3]
 
 [node name="Card" type="PanelContainer"]
 
@@ -29,6 +30,7 @@ alignment = 0
 
 [node name="Top-Bottons" type="VBoxContainer" parent="Card-Perks"]
 
+editor/display_folded = true
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 3
@@ -41,6 +43,7 @@ alignment = 0
 
 [node name="Top" type="TextureFrame" parent="Card-Perks/Top-Bottons"]
 
+editor/display_folded = true
 rect/min_size = Vector2( 0, 20 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -162,18 +165,7 @@ click_on_press = true
 enabled_focus_mode = 2
 shortcut = null
 flat = false
-
-[node name="Perks" type="GridContainer" parent="Card-Perks"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 214.0
-margin/top = 0.0
-margin/right = 354.0
-margin/bottom = 317.0
-columns = 4
+script/script = ExtResource( 3 )
 
 [connection signal="button_down" from="Card-Perks/Top-Bottons/Top/Close" to="." method="_on_close"]
 

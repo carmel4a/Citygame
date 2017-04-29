@@ -33,21 +33,9 @@ func _ready():
 		get_node("Card-Perks/Top-Bottons/Top/Name").set_text(_content["title"])
 		get_node("Card-Perks/Top-Bottons/Text").set_text(_content["text"])
 	
-	for i in range(24):
-		var _c = Control.new()
-		_c.set_custom_minimum_size(Vector2(20,20))
-		get_node("Card-Perks/Perks").add_child(_c)
-	set_perk(3)
 	set_process_input(true)
 	set_process(true)	
 
-func set_perk(id):
-	var _c = Button.new()
-	_c.set_custom_minimum_size(Vector2(20,20))
-	get_node("Card-Perks/Perks").get_children()[id].queue_free()
-	get_node("Card-Perks/Perks").add_child(_c)
-	get_node("Card-Perks/Perks").move_child(get_node("Card-Perks/Perks").get_children()[get_node("Card-Perks/Perks").get_child_count()-1],id-1)
-	
 func _process(delta):
 
 	if dragging == true:
@@ -77,7 +65,7 @@ func save_gd():
 		file.open("res://Card/Cards/_temp/_temp.json",2)
 	file.store_string(_content.to_json())
 	file.close()
-	
+
 func load_gd(name):
 	
 	_content.clear()
@@ -93,8 +81,14 @@ func _update():
 
 func _on_Option_button_selected( button_idx ):
 	
-	print(button_idx)
-	
+	for i in get_node("Card-Perks").get_children(): 
+		if i.get_name()=="Perks":
+			get_node("Card-Perks/Perks").free()
+	var _p = preload("res://Card/Perks.tscn").instance()
+	_p.set_name("Perks")
+	_p.init(_content["options"].keys()[button_idx.get_position_in_parent()-1],_content["sys_name"])
+	get_node("Card-Perks").add_child(_p,true)
+
 func _input_event(event):
 	
 	if event.type == InputEvent.MOUSE_BUTTON and event.button_index == 1:
