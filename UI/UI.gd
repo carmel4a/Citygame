@@ -18,5 +18,5 @@ func _update(what):
 func add_card(what = null):
 	
 	var _c = Card.instance()
-	_c._init()
+	_c._init(what)
 	add_child(_c)

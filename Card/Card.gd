@@ -1,37 +1,52 @@
 tool
 extends PanelContainer
 
+var dragging = false
 var _prev_pos = Vector2(0,0)
 var _clicked_pt 
-var dragging = false
-var _as = AStar.new()
 var _content = {\
-	"sys_name":"_temp",
+	"sys_name":"",
 	"title":"",
 	"image":"",
 	"text":"",
 	"options":{\
 		"option1":{\
-			"text":"Droga",
-			"sys_name":"Droga"
+			"text":"",
+			"sys_name":"",
+			"tooltip":""
 			},
-		"option2":{\
-			"text":"Dom",
-			"sys_name":"Dom"
-			}
 		}
 	}
 
+onready var panel_size = get_node("Card-Perks/Top-Bottons/Top").get_size()
+
 func _ready():
-	print("Here ", self.get_name())
-	load_gd("_temp")
+	
+#	save_gd() # Only for debug/editing
+	load_gd(_content["sys_name"])
 	for i in _content["options"]:
-		var _b = get_node("VBoxContainer/VButtonArray/ButtonsGroup/Button").duplicate()
+		var _b = get_node("Card-Perks/Top-Bottons/VButtonArray/ButtonsGroup/Button").duplicate()
 		_b.set_text(_content["options"][i]["text"])
+		_b.set_tooltip(_content["options"][i]["tooltip"])
 		_b.show()
-		get_node("VBoxContainer/VButtonArray/ButtonsGroup").add_child(_b)
+		get_node("Card-Perks/Top-Bottons/VButtonArray/ButtonsGroup").add_child(_b)
+		get_node("Card-Perks/Top-Bottons/Top/Name").set_text(_content["title"])
+		get_node("Card-Perks/Top-Bottons/Text").set_text(_content["text"])
+	
+	for i in range(24):
+		var _c = Control.new()
+		_c.set_custom_minimum_size(Vector2(20,20))
+		get_node("Card-Perks/Perks").add_child(_c)
+	set_perk(3)
 	set_process_input(true)
-	set_process(true)
+	set_process(true)	
+
+func set_perk(id):
+	var _c = Button.new()
+	_c.set_custom_minimum_size(Vector2(20,20))
+	get_node("Card-Perks/Perks").get_children()[id].queue_free()
+	get_node("Card-Perks/Perks").add_child(_c)
+	get_node("Card-Perks/Perks").move_child(get_node("Card-Perks/Perks").get_children()[get_node("Card-Perks/Perks").get_child_count()-1],id-1)
 	
 func _process(delta):
 
@@ -65,9 +80,9 @@ func save_gd():
 	
 func load_gd(name):
 	
-	var file = File.new()
-	file.open("res://Card/Cards/"+_content["sys_name"] +"/" +_content["sys_name"]+".json",1)
 	_content.clear()
+	var file = File.new()
+	file.open("res://Card/Cards/"+name+"/" +name+".json",1)
 	_content.parse_json(file.get_as_text())
 	file.close()
 	_update()
@@ -81,9 +96,10 @@ func _on_Option_button_selected( button_idx ):
 	print(button_idx)
 	
 func _input_event(event):
+	
 	if event.type == InputEvent.MOUSE_BUTTON and event.button_index == 1:
 		if event.pressed:
-			if Rect2(Vector2(0,0),Vector2(129,25)).has_point(event.pos) and dragging == false:
+			if Rect2(Vector2(0,0),panel_size).has_point(event.pos) and dragging == false:
 				accept_event()
 				raise()
 				dragging = true

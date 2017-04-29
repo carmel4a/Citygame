@@ -11,6 +11,8 @@ func _ready():
 		[floor(map_size.x/2),floor(map_size.y/2+1),"items",0],
 		[floor(map_size.x/2),floor(map_size.y/2-1),"items",0],
 	])
+
 func _add(c):
+	
 	for i in c:
 		get_node(i[2]).set_cell(i[0],i[1],i[3])
