@@ -1,7 +1,7 @@
 extends Node
 
 onready var Game = get_node("/root/Game")
-onready var UI = get_node("/root/Game/CanvasLayer/UI")
+onready var UI = get_node("/root/Game/HUD/UI")
 onready var Level = get_node("/root/Game/Level")
 
 var _update_helper = [false,"",0]
@@ -11,10 +11,6 @@ func _process(delta):
 	if _update_helper[1]:
 		Level.get_node("Helper").set_pos((Game.get_global_mouse_pos()/32).floor()*32)
 
-# x,y,where,what
-func add_cell(c=[]):
-	Level._add(c)
-	
 func show_helper(where,what):
 	
 	var _h = Sprite.new()
@@ -36,12 +32,7 @@ func delete_helper():
 			i.free()
 			break
 
-func adding_to_map(where,what):
-	show_helper(where,what)
-	_update_helper = [true,where,what]
-	set_process(true)
-
 func build_a_house(x,y):
 	if !Level._content[x][y].has("House"):
 		Level._content[x][y].append("House")
-		add_cell([[x,y,"Items",0]])
+		LevelState.add_cell([[x,y,"Items",0]])

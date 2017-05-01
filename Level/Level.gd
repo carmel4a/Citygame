@@ -5,9 +5,6 @@ var tile_size = 32*2
 var _content = []
 var _as = AStar.new()
 
-func _test_astar():
-	print(_as.get_point_path(_as.get_closest_point(Vector3(1,2,0)),_as.get_closest_point(Vector3(50,80,0))))
-
 func _ready():
 	
 	for x in range(map_size.x):
@@ -41,39 +38,39 @@ func grass(x,y):
 	
 	var _r = randf()
 	if _r > 0.75:
-		Global.add_cell([[x,y,"Grass",0]])
+		LevelState.add_cell([[x,y,"Grass",0]])
 	elif _r > 0.5:
-		Global.add_cell([[x,y,"Grass",1]])
+		LevelState.add_cell([[x,y,"Grass",1]])
 	elif _r > 0.05:
-		Global.add_cell([[x,y,"Grass",2]])
+		LevelState.add_cell([[x,y,"Grass",2]])
 	else:
-		Global.add_cell([[x,y,"Grass",3]])
+		LevelState.add_cell([[x,y,"Grass",3]])
 
 func tree(x,y):
 	#omg
 	if randf() > 0.95:
-		Global.add_cell([[x,y,"Trees",0]])
+		LevelState.add_cell([[x,y,"Trees",0]])
 		if randf() > 0.7:
-			Global.add_cell([[x+1,y,"Trees",0]])
+			LevelState.add_cell([[x+1,y,"Trees",0]])
 		if randf() > 0.7:
-			Global.add_cell([[x-1,y,"Trees",0]])
+			LevelState.add_cell([[x-1,y,"Trees",0]])
 		if randf() > 0.7:
-			Global.add_cell([[x,y+1,"Trees",0]])
+			LevelState.add_cell([[x,y+1,"Trees",0]])
 		if randf() > 0.7:
-			Global.add_cell([[x,y-1,"Trees",0]])
+			LevelState.add_cell([[x,y-1,"Trees",0]])
 		if randf() > 0.6:
-			Global.add_cell([[x+2,y,"Trees",0]])
+			LevelState.add_cell([[x+2,y,"Trees",0]])
 		if randf() > 0.6:
-			Global.add_cell([[x-2,y,"Trees",0]])
+			LevelState.add_cell([[x-2,y,"Trees",0]])
 		if randf() > 0.6:
-			Global.add_cell([[x,y+2,"Trees",0]])
+			LevelState.add_cell([[x,y+2,"Trees",0]])
 		if randf() > 0.6:
-			Global.add_cell([[x,y-2,"Trees",0]])
+			LevelState.add_cell([[x,y-2,"Trees",0]])
 		if randf() > 0.5:
-			Global.add_cell([[x+1,y+1,"Trees",0]])
+			LevelState.add_cell([[x+1,y+1,"Trees",0]])
 		if randf() > 0.5:
-			Global.add_cell([[x+1,y-1,"Trees",0]])
+			LevelState.add_cell([[x+1,y-1,"Trees",0]])
 		if randf() > 0.5:
-			Global.add_cell([[x-1,y+1,"Trees",0]])
+			LevelState.add_cell([[x-1,y+1,"Trees",0]])
 		if randf() > 0.5:
-			Global.add_cell([[x-1,y-1,"Trees",0]])
+			LevelState.add_cell([[x-1,y-1,"Trees",0]])
