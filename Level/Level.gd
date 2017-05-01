@@ -3,6 +3,11 @@ extends Node2D
 var map_size = Vector2(100,100)
 var tile_size = 32*2
 var _content = []
+var _as = AStar.new()
+
+func _test_astar():
+	print(_as.get_point_path(_as.get_closest_point(Vector3(1,2,0)),_as.get_closest_point(Vector3(50,80,0))))
+
 func _ready():
 	
 	for x in range(map_size.x):
@@ -10,6 +15,15 @@ func _ready():
 		for y in range(map_size.y):
 			_content[x].append([])
 			_content[x][y].append([])
+			
+			var _p = y*map_size.x+x+1
+			_as.add_point(_p,Vector3(x,y,0))
+			if x != 0:
+				_as.connect_points(_p,_p-1)
+			if y != 0:
+				_as.connect_points(_p,\
+					_p-map_size.x)
+			
 			grass(x,y)
 			tree(x,y)
 
