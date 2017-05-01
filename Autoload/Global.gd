@@ -11,28 +11,6 @@ func _process(delta):
 	if _update_helper[1]:
 		Level.get_node("Helper").set_pos((Game.get_global_mouse_pos()/32).floor()*32)
 
-func get_turn_no():
-	
-	return(Game.Turn)
-	
-func set_IP(v):
-	
-	UI._update(["Stats/Label"])
-	Game.acc_IP = v
-
-func get_IP():
-	
-	return(Game.acc_IP)
-
-func get_IP_diff():
-	
-	return(Game.dif_IP)
-
-func set_IP_diff(v):
-	
-	UI._update(["Stats/Label"])
-	Game.dif_IP = v
-
 # x,y,where,what
 func add_cell(c=[]):
 	Level._add(c)
@@ -66,4 +44,4 @@ func adding_to_map(where,what):
 func build_a_house(x,y):
 	if !Level._content[x][y].has("House"):
 		Level._content[x][y].append("House")
-		add_cell([[x,y,"items",0]])
+		add_cell([[x,y,"Items",0]])

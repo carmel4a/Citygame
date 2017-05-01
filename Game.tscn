@@ -21,7 +21,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TileMap" type="TileMap" parent="Level"]
+[node name="Grass" type="TileMap" parent="Level"]
 
 transform/scale = Vector2( 2, 2 )
 mode = 0
@@ -43,7 +43,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="roads" type="TileMap" parent="Level"]
+[node name="Roads" type="TileMap" parent="Level"]
 
 transform/scale = Vector2( 4, 4 )
 mode = 0
@@ -65,7 +65,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="items" type="TileMap" parent="Level"]
+[node name="Items" type="TileMap" parent="Level"]
 
 transform/scale = Vector2( 4, 4 )
 mode = 0

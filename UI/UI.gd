@@ -13,7 +13,7 @@ func _update(what):
 	
 	for i in what:
 		if i == "Stats/Label":
-			get_node("Stats/Label").set_text("IP: " + str(GlobalMethods.get_IP()) + " (" + str(GlobalMethods.get_IP_diff()) + ")")
+			get_node("Stats/Label").set_text("IP: " + str(GameState._Auth) + " (" + str(GameState._d_Auth) + ")")
 
 func add_card(what = null):
 	

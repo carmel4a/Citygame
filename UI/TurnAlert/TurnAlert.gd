@@ -7,7 +7,7 @@ func _ready():
 		# some fcns to random choose a card
 		var random_cardd = "Simple_decision"
 		what = random_cardd
-		set_text("Card from Turn"+str(GlobalMethods.get_turn_no())+" | "+what)
+		set_text("Card from Turn"+str(Global.get_turn_no())+" | "+what)
 	if type == "Init":
 		set_text("Init")
 	
