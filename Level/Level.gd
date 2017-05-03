@@ -76,7 +76,7 @@ func tree(x,y):
 		if randf() > 0.5:
 			LevelState.add_cell([[x-1,y-1,"Trees",0]])
 func _get_middle(va,vb):
-	return(Vector2((va.x+vb.x)/2,(va.y+vb.y)/2))
+	return(Vector2((va+vb)/2))
 func _get_v_from(va,vb):
 	return((vb-va)/2)
 func river():
