@@ -75,17 +75,19 @@ func tree(x,y):
 			LevelState.add_cell([[x-1,y+1,"Trees",0]])
 		if randf() > 0.5:
 			LevelState.add_cell([[x-1,y-1,"Trees",0]])
-
+func _get_middle(va,vb):
+	return(Vector2((va.x+vb.x)/2,(va.y+vb.y)/2))
+func _get_v_from(va,vb):
+	return((vb-va)/2)
 func river():
 	var _s1 = randi()%4
 	var _sl = Vector2()
 	var _el = Vector2()
 	var _ar = [_sl,_el]
-	for i in range(_ar.size()):
+	for i in range(2):
 		var _s2 = randi()%4
 		while _s1 == _s2:
 			_s2 = randi()%4
-
 		_s1 = _s2
 		if _s2 == 0:
 			_ar[i] = Vector2(0,rand_range(0,map_size.y)).floor()
@@ -97,6 +99,34 @@ func river():
 			_ar[i] = Vector2(rand_range(0,map_size.x),map_size.y-1).floor()
 	LevelState.add_cell([[_ar[0].x,_ar[0].y,"Water",0]])
 	LevelState.add_cell([[_ar[1].x,_ar[1].y,"Water",0]])
-	for i in _as.get_point_path(_ar[0].y*map_size.x+_ar[0].x,_ar[1].y*map_size.x+_ar[1].x):
-		LevelState.add_cell([[i.x,i.y,"Water",0]])
+	var _bp = Curve2D.new()
+	var _p = Curve2D.new()
 	
+	_bp.set_bake_interval(0.8)
+	_p.set_bake_interval(0.8)
+	_bp.add_point(_ar[0])
+	_bp.add_point(_ar[1])
+	var _d = round(rand_range(-50,50))
+	_bp.add_point(_get_middle(_bp.get_point_pos(0),_bp.get_point_pos(1))+(_get_v_from(_bp.get_point_pos(0),_bp.get_point_pos(1)).normalized().tangent())*_d,\
+		Vector2(0,0),\
+		Vector2(0,0),\
+		1)
+	for i in range(4):
+		for j in range(1,_bp.get_point_count()-1,2):
+			_d = round(rand_range(-10,10))
+			_bp.add_point(_get_middle(_bp.get_point_pos(j),_bp.get_point_pos(j+1))+(_get_v_from(_bp.get_point_pos(j),_bp.get_point_pos(j+1)).normalized().tangent())*_d,\
+		Vector2(0,0),\
+		Vector2(0,0),\
+		j+1)
+	for i in range(_bp.get_point_count()-1):
+		_p.add_point(_get_middle(_bp.get_point_pos(i+1),_bp.get_point_pos(i)),\
+		Vector2(0,0),\
+		_get_middle(_bp.get_point_pos(i+1),_bp.get_point_pos(i))-_bp.get_point_pos(i))
+		
+	_p.add_point(_ar[0],Vector2(0,0),Vector2(0,0),0)
+	_p.add_point(_ar[1])
+#	for i in _bp.get_baked_points():
+#		LevelState.add_cell([[i.x,i.y,"Water",0]])
+	for i in _p.get_baked_points():
+		LevelState.add_cell([[i.x,i.y,"Water",0]])
+#		LevelState.add_cell([[i.x-1,i.y,"Water",0]])
