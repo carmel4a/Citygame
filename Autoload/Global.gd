@@ -40,10 +40,14 @@ func update_road(x,y):
 	if _s[1] or _s[3]:
 		LevelState.add_cell([[x,y,"Roads",1]])
 		
-	if (_s[0] and _s[1]) or (_s[0] and _s[3]):
-		LevelState.add_cell([[x,y,"Roads",2]])
-	if (_s[2] and _s[1]) or (_s[2] and _s[3]):
-		LevelState.add_cell([[x,y,"Roads",3]])
+	if (_s[0] and _s[1]):
+		LevelState.add_cell([[x,y,"Roads",7]])
+	if (_s[2] and _s[1]):
+		LevelState.add_cell([[x,y,"Roads",12]])
+	if (_s[0] and _s[3]):
+		LevelState.add_cell([[x,y,"Roads",11]])
+	if (_s[2] and _s[3]):
+		LevelState.add_cell([[x,y,"Roads",9]])
 
 	if _s[0] and _s[1] and _s[3] :
 		LevelState.add_cell([[x,y,"Roads",2]])
