@@ -5,7 +5,6 @@ onready var UI = get_node("/root/Game/HUD/UI")
 onready var Level = get_node("/root/Game/Level")
 
 func show_helper(where,what):
-	
 	var _h = Sprite.new()
 	var _i = false
 	for i in Level.get_children():
@@ -46,13 +45,13 @@ func update_road(x,y):
 	if (_s[2] and _s[1]) or (_s[2] and _s[3]):
 		LevelState.add_cell([[x,y,"Roads",3]])
 
-	if _s[0] and (_s[1] and _s[3]) :
+	if _s[0] and _s[1] and _s[3] :
 		LevelState.add_cell([[x,y,"Roads",2]])
-	if _s[2] and (_s[1] and _s[3]):
+	if _s[2] and _s[1] and _s[3]:
 		LevelState.add_cell([[x,y,"Roads",3]])
-	if _s[2] and (_s[0] and _s[3]):
+	if _s[2] and _s[0] and _s[3]:
 		LevelState.add_cell([[x,y,"Roads",4]])
-	if _s[1] and (_s[0] and _s[2]):
+	if _s[1] and _s[0] and _s[2]:
 		LevelState.add_cell([[x,y,"Roads",5]])
 	if _s[0] and _s[1] and _s[2] and _s[3]:
 		LevelState.add_cell([[x,y,"Roads",6]])
@@ -61,7 +60,7 @@ func bulid_a_road(x,y):
 	!Level._content[x][y].has("Trees") and\
 	!Level._content[x][y].has("River"):
 		Level._content[x][y].append("Road")
-		LevelState.add_cell([[x,y,"Roads",6]])
+		update_road(x,y)
 	var _s = [false,false,false,false]
 	if Level._content[x-1][y].has("Road"):
 		_s[0] = true

@@ -45,10 +45,10 @@ __meta__ = {
 
 [node name="Roads" type="TileMap" parent="Level"]
 
-transform/scale = Vector2( 4, 4 )
+transform/scale = Vector2( 2, 2 )
 mode = 0
 tile_set = ExtResource( 4 )
-cell/size = Vector2( 16, 16 )
+cell/size = Vector2( 32, 32 )
 cell/quadrant_size = 16
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 cell/half_offset = 2
