@@ -3,7 +3,10 @@ extends Node
 onready var Game = get_node("/root/Game")
 onready var UI = get_node("/root/Game/HUD/UI")
 onready var Level = get_node("/root/Game/Level")
-
+func _ready():
+	add_user_signal("done")
+func foo():
+	emit_signal("done")
 func show_helper(where,what):
 	var _h = Sprite.new()
 	var _i = false
@@ -13,6 +16,8 @@ func show_helper(where,what):
 			break
 	if !_i:
 		_h.set_texture(Level.get_node(where).get_tileset().tile_get_texture(what))
+		_h.set_region(true)
+		_h.set_region_rect(Level.get_node(where).get_tileset().tile_get_region(what))
 		_h.set_name("Helper")
 		_h.set_scale(Level.get_node(where).get_scale())
 		Level.add_child(_h)
@@ -25,18 +30,21 @@ func delete_helper():
 			break
 func update_road(x,y):
 	var _s = [false,false,false,false]
-	if Level._content[x-1][y].has("Road"):
-		_s[0] = true
-	if Level._content[x][y-1].has("Road"):
-		_s[1] = true
-	if Level._content[x+1][y].has("Road"):
-		_s[2] = true
-	if Level._content[x][y+1].has("Road"):
-		_s[3] = true
+	if x > 0:
+		if Level._content[x-1][y].has("Road"):
+			_s[0] = true
+	if y > 0:
+		if Level._content[x][y-1].has("Road"):
+			_s[1] = true
+	if x+1 < Level._content.size():
+		if Level._content[x+1][y].has("Road"):
+			_s[2] = true
+	if x < Level._content.size() and y+1 < Level._content[x].size():
+		if Level._content[x][y+1].has("Road"):
+			_s[3] = true
 	LevelState.add_cell([[x,y,"Roads",6]])
 	if _s[0] or _s[2]:
 		LevelState.add_cell([[x,y,"Roads",0]])
-		print("here")
 	if _s[1] or _s[3]:
 		LevelState.add_cell([[x,y,"Roads",1]])
 		
@@ -65,23 +73,29 @@ func bulid_a_road(x,y):
 	!Level._content[x][y].has("River"):
 		Level._content[x][y].append("Road")
 		update_road(x,y)
-	var _s = [false,false,false,false]
-	if Level._content[x-1][y].has("Road"):
-		_s[0] = true
-	if Level._content[x][y-1].has("Road"):
-		_s[1] = true
-	if Level._content[x+1][y].has("Road"):
-		_s[2] = true
-	if Level._content[x][y+1].has("Road"):
-		_s[3] = true
-	if _s[0]:
-		update_road(x-1,y)
-	if _s[1]:
-		update_road(x,y-1)
-	if _s[2]:
-		update_road(x+1,y)
-	if _s[3]:
-		update_road(x,y+1)
+		var _s = [false,false,false,false]
+		if x > 0:
+			if Level._content[x-1][y].has("Road"):
+				_s[0] = true
+		if y > 0:
+			if Level._content[x][y-1].has("Road"):
+				_s[1] = true
+		if x+1 < Level._content.size():
+			if Level._content[x+1][y].has("Road"):
+				_s[2] = true
+		if x < Level._content.size() and y+1 < Level._content[x].size():
+			if Level._content[x][y+1].has("Road"):
+				_s[3] = true
+		if _s[0]:
+			update_road(x-1,y)
+		if _s[1]:
+			update_road(x,y-1)
+		if _s[2]:
+			update_road(x+1,y)
+		if _s[3]:
+			update_road(x,y+1)
+		return(true)
+	return(false)
 
 func build_a_house(x,y):
 	if !Level._content[x][y].has("House") and\
@@ -89,3 +103,14 @@ func build_a_house(x,y):
 	!Level._content[x][y].has("River"):
 		Level._content[x][y].append("House")
 		LevelState.add_cell([[x,y,"Items",0]])
+		return(true)
+	return(false)
+	
+func build(x,y,what):
+	if what == "Road": 
+		call_deferred("foo")
+		return(bulid_a_road(x,y))
+		
+	if what == "House": 
+		call_deferred("foo")
+		return(build_a_house(x,y))

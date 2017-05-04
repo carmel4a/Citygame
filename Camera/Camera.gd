@@ -36,10 +36,10 @@ var prev_mouse_pos = null
 func _ready():
 	
 	set_pos(Global.Level.map_size*(Global.Level.tile_size)/2)
-	set_limit(0,0)
-	set_limit(1,0)
-	set_limit(2,Global.Level.map_size.x*(Global.Level.tile_size))
-	set_limit(3,Global.Level.map_size.y*(Global.Level.tile_size))
+#	set_limit(0,0)
+#	set_limit(1,0)
+#	set_limit(2,Global.Level.map_size.x*(Global.Level.tile_size))
+#	set_limit(3,Global.Level.map_size.y*(Global.Level.tile_size))
 	set_fixed_process(true)
 	set_process_input(true)
 
@@ -71,7 +71,7 @@ func _fixed_process(delta):
 			camera_movement.y -= camera_speed * delta
 	
 	# Control by right mouse button; draging. Have no idea how it is working.
-	if drag == true:
+	if drag and LevelState._update_helper[0]==false:
 		if Input.is_mouse_button_pressed(BUTTON_RIGHT):
 			camera_movement = prev_mouse_pos - get_viewport().get_mouse_pos()
 	

@@ -14,11 +14,13 @@ func _ready():
 		_c.set_custom_minimum_size(Vector2(20,20))
 		add_child(_c)
 	var _h = Node.new()
-	print(where," ",what)
+	for i in get_children():
+		if i.get_name() == "helper":
+			get_node("helper").queue_free()
 	_h.set_script(load("res://Card/Cards/"+where+"/"+what+".gd"))
 	_h.set_name("helper")
 	add_child(_h,true)
-	get_node("helper").queue_free()
+	
 	show()
 	
 	
