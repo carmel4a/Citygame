@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=11 format=1]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://Level/Level.gd" type="Script" id=2]
@@ -7,15 +7,21 @@
 [ext_resource path="res://Tiles/items.tres" type="TileSet" id=5]
 [ext_resource path="res://Tiles/Water.tres" type="TileSet" id=6]
 [ext_resource path="res://Tiles/Trees.tres" type="TileSet" id=7]
-[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=9]
+[ext_resource path="res://UI/Hepers.gd" type="Script" id=8]
+[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=10]
 
 [node name="Game" type="Node2D"]
 
 script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+vseed = -1
 
 [node name="Level" type="Node2D" parent="."]
 
+editor/display_folded = true
 script/script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -131,6 +137,10 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Helpers" type="Node2D" parent="Level"]
+
+script/script = ExtResource( 8 )
+
 [node name="HUD" type="CanvasLayer" parent="."]
 
 layer = 1
@@ -138,8 +148,10 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 
-[node name="UI" parent="HUD" instance=ExtResource( 8 )]
+[node name="UI" parent="HUD" instance=ExtResource( 9 )]
 
-[node name="Camera" parent="." instance=ExtResource( 9 )]
+[node name="Camera" parent="." instance=ExtResource( 10 )]
+
+edge = true
 
 

@@ -3,11 +3,21 @@ extends Node
 onready var Game = get_node("/root/Game")
 onready var UI = get_node("/root/Game/HUD/UI")
 onready var Level = get_node("/root/Game/Level")
+
+func content(v):
+	
+	return(Level._content[v.x][v.y])
+
 func _ready():
+	
 	add_user_signal("done")
-func foo():
+
+func done():
+	
 	emit_signal("done")
+
 func show_helper(where,what):
+	
 	var _h = Sprite.new()
 	var _i = false
 	for i in Level.get_children():
@@ -108,9 +118,9 @@ func build_a_house(x,y):
 	
 func build(x,y,what):
 	if what == "Road": 
-		call_deferred("foo")
+		call_deferred("done")
 		return(bulid_a_road(x,y))
 		
 	if what == "House": 
-		call_deferred("foo")
+		call_deferred("done")
 		return(build_a_house(x,y))

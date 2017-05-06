@@ -16,4 +16,4 @@ func generate_alert(ty):
 	var _b = Global.UI.TurnAlert.instance()
 	_b.type = ty
 	_b.show()
-	Global.UI.get_node("ScrollContainer/VButtonArray").add_child(_b)
+	Global.UI.get_node("Alerts/AlertsArray").add_child(_b)

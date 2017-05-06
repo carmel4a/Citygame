@@ -8,10 +8,10 @@ var _d_Auth = 5
 
 func set_Auth_diff(v):
 	
-	Global.UI._update(["Stats/Label"])
 	_d_Auth = v
+	Global.UI._update(["Stats/Label"])
 
 func set_Auth(v):
 	
-	Global.UI._update(["Stats/Label"])
 	_Auth = v
+	Global.UI._update(["Stats/Label"])

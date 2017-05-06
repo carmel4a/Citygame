@@ -19,7 +19,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="Alerts" type="ScrollContainer" parent="."]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -32,7 +32,7 @@ margin/bottom = 595.0
 scroll/horizontal = false
 scroll/vertical = true
 
-[node name="VButtonArray" type="VBoxContainer" parent="ScrollContainer"]
+[node name="AlertsArray" type="VBoxContainer" parent="Alerts"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false

@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "
+extends RichTextLabel
+var _first = false
+
+func _ready():
+	
+	if !_first:
+		get_v_scroll().show()
+		_first = true
+	set_size(Vector2(get_size().x,get_size().y+1))
+	if get_v_scroll().is_visible():
+		call_deferred(\"_ready\")
+	else:
+		get_parent().set_size(get_size())
+		get_v_scroll().hide()
+"
+
+[node name="Tooltip" type="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 165.0
+margin/bottom = 0.0
+
+[node name="Panel" type="Panel" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+
+[node name="RTLabel" type="RichTextLabel" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 1
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+bbcode/enabled = false
+bbcode/bbcode = ""
+visible_characters = -1
+script/script = SubResource( 1 )
+
+

@@ -61,11 +61,11 @@ func _fixed_process(delta):
 	
 	# Control by mouse when it is in the margin (defined by camera_margin).
 	if edge == true:
-		if get_viewport().get_rect().size.x - get_viewport().get_mouse_pos().x < camera_margin:
+		if get_viewport_rect().size.x - get_viewport().get_mouse_pos().x < camera_margin:
 			camera_movement.x += camera_speed * delta
 		if get_viewport().get_mouse_pos().x < camera_margin:
 			camera_movement.x -= camera_speed * delta
-		if get_viewport().get_rect().size.y - get_viewport().get_mouse_pos().y < camera_margin:
+		if get_viewport_rect().size.y - get_viewport().get_mouse_pos().y < camera_margin:
 			camera_movement.y += camera_speed * delta
 		if get_viewport().get_mouse_pos().y < camera_margin:
 			camera_movement.y -= camera_speed * delta

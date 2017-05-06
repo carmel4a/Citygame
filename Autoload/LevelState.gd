@@ -1,10 +1,13 @@
 extends Node
+
 var _update_helper = [false,"",0]
 	
 func _process(delta):
+	
 	_process_adding()
 	
 func _process_adding():
+	
 	if _update_helper[1]:
 		Global.Level.get_node("Helper").set_pos((Global.Game.get_global_mouse_pos()/Global.Level.tile_size)*Global.Level.tile_size)
 	if Input.is_mouse_button_pressed(1):
@@ -20,9 +23,11 @@ func _process_adding():
 			Global.delete_helper()
 # array of [x,y,where,what]
 func add_cell(c=[[]]):
+	
 	Global.Level._add(c)
 	
 func adding_to_map(where,what,sys_name):
+	
 	Global.show_helper(where,what)
 	_update_helper = [true,where,sys_name]
 	set_process(true)
