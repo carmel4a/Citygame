@@ -47,21 +47,13 @@ func _ready():
 			# GenMod for each cell
 			# after 'in' pass a array of sorted scripts in Level/GenMod
 			for i in [\
+			["tree",[x,y]]\
 			]:
-				var _s = i.load("res://Level/GenMod/"+i+".gd")
+				var _s = load("res://Level/GenMod/"+i[0]+".gd")
 				_h.set_script(_s)
 				_h.init(i[1])
 				_h._ready()
-				
 			grass(x,y)
-			if x > 2 and y > 2 and x < map_size.x -2 and y < map_size.y -2:
-				for i in [\
-				["tree",[x,y]]\
-				]:
-					var _s = load("res://Level/GenMod/"+i[0]+".gd")
-					_h.set_script(_s)
-					_h.init(i[1])
-					_h._ready()
 
 	# here will be more complex GenMods wich depends
 	# on each other and/or need multiple iterations,
