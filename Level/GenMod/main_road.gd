@@ -28,8 +28,7 @@ func _ready():
 		Vector2(0,0),\
 		Vector2(0,0),\
 		1)
-
-
+	
 	for i in range(3):
 		for j in range(1,_bp.get_point_count()-1,2):
 			_d = round(rand_range(-10,10))
@@ -40,13 +39,13 @@ func _ready():
 	for i in range(_bp.get_baked_points().size()-1):
 		if _content.size()>_bp.get_baked_points()[i].x and\
 		_content[_bp.get_baked_points()[i].x].size()>_bp.get_baked_points()[i].y:
-			Global.bulid_a_road(_bp.get_baked_points()[i].x,_bp.get_baked_points()[i].y)
+			Economy.add_entitie("Road",[_bp.get_baked_points()[i].x,_bp.get_baked_points()[i].y])
 			_content[_bp.get_baked_points()[i].x][_bp.get_baked_points()[i].y].append("Road")
 			if _bp.get_baked_points()[i].x > 0 and _bp.get_baked_points()[i].y > 0:
 				if (floor(_bp.get_baked_points()[i-1].x) != floor(_bp.get_baked_points()[i].x)) and (floor(_bp.get_baked_points()[i-1].y) != floor(_bp.get_baked_points()[i].y)):
 					if _bp.get_baked_points()[i].x-_bp.get_baked_points()[i-1].x>=0:
-						Global.bulid_a_road(_bp.get_baked_points()[i].x-1,_bp.get_baked_points()[i].y)
+						Economy.add_entitie("Road",[_bp.get_baked_points()[i].x-1,_bp.get_baked_points()[i].y])
 						_content[_bp.get_baked_points()[i].x-1][_bp.get_baked_points()[i].y].append("Road")
 					else:
-						Global.bulid_a_road(_bp.get_baked_points()[i].x+1,_bp.get_baked_points()[i].y)
+						Economy.add_entitie("Road",[_bp.get_baked_points()[i].x+1,_bp.get_baked_points()[i].y])
 						_content[_bp.get_baked_points()[i].x+1][_bp.get_baked_points()[i].y].append("Road")

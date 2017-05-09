@@ -53,7 +53,7 @@ func _ready():
 				_h.set_script(_s)
 				_h.init(i[1])
 				_h._ready()
-			grass(x,y)
+			Economy.add_entitie("Grass",[x,y])
 
 	# here will be more complex GenMods wich depends
 	# on each other and/or need multiple iterations,
@@ -61,20 +61,8 @@ func _ready():
 	
 # A framework func wich allow to direct add a cells to multiple TileMaps,
 # with various types of cells, layers etc. Data are passed in ar=[tile1[],tile2[]]
-# where tile* is an array [x,y, layer (Level's Tilemaps as str()), type]
+# where tile* is an array [x,y, layer (Level's Tilemap's name as str()), type]
 func _add(c):
 	
 	for i in c:
 		get_node(i[2]).set_cell(i[0],i[1],i[3])
-
-func grass(x,y):
-	
-	var _r = randf()
-	if _r > 0.75:
-		LevelState.add_cell([[x,y,"Grass",0]])
-	elif _r > 0.5:
-		LevelState.add_cell([[x,y,"Grass",1]])
-	elif _r > 0.05:
-		LevelState.add_cell([[x,y,"Grass",2]])
-	else:
-		LevelState.add_cell([[x,y,"Grass",3]])

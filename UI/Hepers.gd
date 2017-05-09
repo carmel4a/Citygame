@@ -1,15 +1,24 @@
 extends Node2D
-
+# an array with names of helper's nodes which are moving with mouse.
 var follow_mouse = []
-
-func add_map_helper(name, actualize = true):
-	
+# add and show map "helper"/"shadow" - a sprite which may move with mouse (with mouse)
+func add_map_helper(\
+name,\
+tex,\
+region = false,\
+region_rect = Rect2(Vector2(0,0),Vector2(0,0)),\
+scale = Vector2(2,2),\
+actualize = true):
+	# check if actually have that
+	for i in get_children():
+		if i.get_name()==name:
+			print("ERROR: Have that helper: "+name)
+			return (false)
 	var _s = Sprite.new()
-	#swich for names?
-	_s.set_texture(preload("res://UI/map_icons/map_icons.png"))
-	_s.set_region(true)
-	_s.set_region_rect(Rect2(Vector2(32,0),Vector2(32,32)))
-	_s.set_scale(Vector2(2,2))
+	_s.set_texture(tex)
+	_s.set_region(region)
+	_s.set_region_rect(region_rect)
+	_s.set_scale(scale)
 	_s.set_name(name)
 	add_child(_s)
 	follow_mouse.append(name)
@@ -17,9 +26,7 @@ func add_map_helper(name, actualize = true):
 		set_process(true)
 
 func del_map_helper(name):
-#	print(name)
-	for i in get_children():
-		print(i.get_name())
+	
 	get_node(name).free()
 	follow_mouse.erase(name)
 	if follow_mouse.size() == 0:
@@ -27,6 +34,7 @@ func del_map_helper(name):
 
 func _process(delta):
 	
-	var _mp = Global.Game.get_global_mouse_pos()
+	var _mp = get_global_mouse_pos()
 	for i in follow_mouse:
-			get_node("start_helper").set_global_pos(Vector2((_mp/64).floor()*64+Vector2(32,32)))
+		# don't ask/don't touch
+		get_node(i).set_global_pos((_mp/(get_node(i).get_item_rect().size*get_node(i).get_scale())).floor()*(get_node(i).get_item_rect().size*get_node(i).get_scale())+get_node(i).get_item_rect().size)

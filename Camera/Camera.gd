@@ -76,7 +76,12 @@ func _fixed_process(delta):
 			camera_movement = prev_mouse_pos - get_viewport().get_mouse_pos()
 	
 	# Update position of the camera.
-	set_pos(get_pos() + camera_movement * get_zoom())
+	var _npos = get_global_pos() + camera_movement * get_zoom()
+	if _npos.x > get_limit(0) and \
+	_npos.y > get_limit(1) and \
+	_npos.x < get_limit(2) and \
+	_npos.y < get_limit(3):
+		set_pos(get_pos() + camera_movement * get_zoom())
 	prev_mouse_pos = get_viewport().get_mouse_pos()
 
 func _input(event):

@@ -17,7 +17,7 @@ func _ready():
 		!_content[x][y].has("House") and\
 		_content.size()>x and\
 		_content[x].size()>y:
-			LevelState.add_cell([[x,y,"Trees",0]])
+			Economy.add_entitie("Trees",[x,y])
 			_content[x][y].append("Trees")
 			for i in [[x+1,y],[x-1,y],[x,y+1],[x,y-1]]:
 				if i[0] >= 0 and \
@@ -27,7 +27,7 @@ func _ready():
 					if randf() > 0.7 and\
 					!_content[i[0]][i[1]].has("River") and\
 					!_content[i[0]][i[1]].has("Road"):
-						LevelState.add_cell([[i[0],i[1],"Trees",0]])
+						Economy.add_entitie("Trees",[i[0],i[1]])
 						_content[i[0]][i[1]].append("Trees")
 			for i in [[x+2,y],[x-2,y],[x,y+2],[x,y-2]]:
 				if i[0] >= 0 and \
@@ -37,7 +37,7 @@ func _ready():
 					if randf() > 0.6 and\
 					!_content[i[0]][i[1]].has("River") and\
 					!_content[i[0]][i[1]].has("Road"):
-						LevelState.add_cell([[i[0],i[1],"Trees",0]])
+						Economy.add_entitie("Trees",[i[0],i[1]])
 						_content[i[0]][i[1]].append("Trees")
 			for i in [[x+1,y+1],[x-1,y-1],[x+1,y-1],[x-1,y+1]]:
 				if i[0] >= 0 and \
@@ -47,5 +47,5 @@ func _ready():
 					if randf() > 0.5 and\
 					!_content[i[0]][i[1]].has("Road") and\
 					!_content[i[0]][i[1]].has("River"):
-						LevelState.add_cell([[i[0],i[1],"Trees",0]])
+						Economy.add_entitie("Trees",[i[0],i[1]])
 						_content[i[0]][i[1]].append("Trees")

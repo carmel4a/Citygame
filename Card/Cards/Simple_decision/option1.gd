@@ -8,11 +8,8 @@ func _ready():
 func building():
 	for i in range(2):
 		LevelState.adding_to_map("Roads",0,"Road")
-		print("preyelded")
 		yield(Global,"done")
-		print("yelded")
 
 func building1():
-	for i in range(2):
-		LevelState.adding_to_map("Items",0,"House")
-		
+	
+	LevelState.adding_to_map("Items",0,"House")

@@ -13,7 +13,7 @@ var _content = {\
 		"option1":{\
 			"text":"",
 			"sys_name":"",
-			"tooltip":""
+			"tooltip":"" #bbcCode
 			},
 		}
 	}

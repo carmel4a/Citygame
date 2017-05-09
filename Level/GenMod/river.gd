@@ -24,8 +24,6 @@ func _ready():
 			_ar[i] = Vector2(map_size.x-1,rand_range(0,map_size.y)).floor()
 		if _s2 == 3:
 			_ar[i] = Vector2(rand_range(0,map_size.x),map_size.y-1).floor()
-	LevelState.add_cell([[_ar[0].x,_ar[0].y,"Water",0]])
-	LevelState.add_cell([[_ar[1].x,_ar[1].y,"Water",0]])
 	var _bp = Curve2D.new()
 	var _p = Curve2D.new()
 	_bp.set_bake_interval(0.99)
@@ -59,8 +57,8 @@ func _ready():
 			_content[i.floor().x][i.floor().y].append("River")
 			if (i.floor().x+1 < _content.size()):
 				_content[i.floor().x+1][i.floor().y].append("River")
-				LevelState.add_cell([[i.floor().x+1,i.floor().y,"Water",0]])
+				Economy.add_entitie("River",[i.floor().x+1,i.floor().y])
 			if (i.floor().y+1 < _content[i.floor().x].size()):
 				_content[i.floor().x][i.floor().y+1].append("River")
-				LevelState.add_cell([[i.floor().x,i.floor().y+1,"Water",0]])
-			LevelState.add_cell([[i.floor().x,i.floor().y,"Water",0]])
+				Economy.add_entitie("River",[i.floor().x,i.floor().y+1])
+			Economy.add_entitie("River",[i.floor().x,i.floor().y])
