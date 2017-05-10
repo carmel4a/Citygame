@@ -42,8 +42,8 @@ func _process(delta):
 			!Global.content((_mp/64).floor()-Vector2(0,1)).has("Trees"):
 				Global.Level.get_node("Helpers/start_helper").set_region_rect(Rect2(Vector2(0,0),Vector2(32,32)))
 				if Input.is_mouse_button_pressed(1):
-					Global.build_a_house(floor(_mp.x/64),floor(_mp.y/64)+1)
-					Global.build_a_house(floor(_mp.x/64),floor(_mp.y/64)-1)
+					Economy.add_entitie("House",[floor(_mp.x/64),floor(_mp.y/64)+1])
+					Economy.add_entitie("House",[floor(_mp.x/64),floor(_mp.y/64)-1])
 					_bef_ng = false
 					set_process(false)
 					get_node("HUD/start_label").free()
