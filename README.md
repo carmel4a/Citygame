@@ -1,6 +1,6 @@
 ###### working title
 # Citygame
-![screenshot](https://github.com/carmel4a/Citygame/REPO/scr1.png "preview")
+![screenshot](https://github.com/carmel4a/Citygame/blob/master/REPO/scr1.png "preview")
 ### 1. Requirements
 - Godot Engine 2.1.3 [link](https://godotengine.org/)
 - computer :)
