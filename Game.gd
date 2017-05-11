@@ -48,6 +48,7 @@ func _process(delta):
 					set_process(false)
 					get_node("HUD/start_label").free()
 					Global.Level.get_node("Helpers").del_map_helper("start_helper")
+					Global.UI.get_node("Stats/NextTurn").set_disabled(false)
 			elif Global.Level.get_node("Roads").get_cell((_mp/64).floor().x,(_mp/64).floor().y) == 1 and \
 			!Global.content((_mp/64).floor()+Vector2(1,0)).has("House") and \
 			!Global.content((_mp/64).floor()+Vector2(1,0)).has("Trees") and \
@@ -62,7 +63,7 @@ func _process(delta):
 					set_process(false)
 					Global.Level.get_node("Helpers").del_map_helper("start_helper")
 					get_node("HUD/start_label").free()
-
+					Global.UI.get_node("Stats/NextTurn").set_disabled(false)
 func _next_turn():
 	
 	GameState._Turn += 1

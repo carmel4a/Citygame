@@ -59,7 +59,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Button" type="Button" parent="Stats"]
+[node name="NextTurn" type="Button" parent="Stats"]
 
 anchor/left = 2
 anchor/top = 3
@@ -73,6 +73,7 @@ margin/left = 0.920898
 margin/top = 10.0
 margin/right = 7.0
 margin/bottom = -10.0
+disabled = true
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -93,5 +94,18 @@ text = "Decision Points: * (+/-x)"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="Cards" type="HBoxContainer" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 94.0
+margin/top = 160.0
+margin/right = 843.0
+margin/bottom = 256.0
+custom_constants/separation = 15
+alignment = 1
 
 

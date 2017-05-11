@@ -28,7 +28,10 @@ func _process_adding():
 			_update_helper = [false,"",0]
 			set_process(false)
 			Global.Level.get_node("Helpers").del_map_helper("adding_helper")
+			Signals.emit("adding_to_map")
+	
 	if Input.is_mouse_button_pressed(2):
 			_update_helper = [false,"",0]
 			set_process(false)
 			Global.Level.get_node("Helpers").del_map_helper("adding_helper")
+			Signals.emit("Cancel")

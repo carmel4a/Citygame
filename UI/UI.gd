@@ -5,7 +5,7 @@ var Card = preload("res://Card/Card.tscn")
 
 func _ready():
 
-	get_node("Stats/Button").connect("button_down",get_node("../../"),"_next_turn")
+	get_node("Stats/NextTurn").connect("button_down",get_node("../../"),"_next_turn")
 	_update(["Stats/Label"])
 	set_process_input(true)
 	
@@ -19,4 +19,4 @@ func add_card(what = null):
 	
 	var _c = Card.instance()
 	_c._init(what)
-	add_child(_c)
+	get_node("Cards").add_child(_c)

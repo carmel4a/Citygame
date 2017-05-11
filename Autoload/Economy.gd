@@ -6,7 +6,6 @@ func add_entitie(what,args):
 		var _c = _e.get(what).new()
 		_c.init(args)
 		if _c._ready():
-			Global.call_deferred("done")
 			return(true)
 		else:
 			return(false)

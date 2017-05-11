@@ -1,11 +1,12 @@
 extends Node
 class Road:
-	var _done
+	var _done = false
 	func init(xy):
 		var x = xy[0]
 		var y = xy[1]
 		if !Global.Level._content[x][y].has("Road") and\
 		!Global.Level._content[x][y].has("Trees") and\
+		!Global.Level._content[x][y].has("House") and\
 		!Global.Level._content[x][y].has("River"):
 			Global.Level._content[x][y].append("Road")
 			update_road(x,y)

@@ -8,7 +8,7 @@ var tile_size = 32*2
 
 var _content = []
 var _as = AStar.new()
-
+onready var _h = Node.new()
 func _ready():
 	
 	# make a _content 2D array
@@ -28,37 +28,28 @@ func _ready():
 	# GenMod beafore full map iteration
 	# after 'in' pass a array of sorted scripts
 	# in 'Level/GenMod' and args[]
-	var _h = Node.new()
+	
 	_h.set_name("_h")
 	add_child(_h)
 	_h = get_node("_h")
-	for i in [\
+	_gen_mods([\
 	["river",null],\
 	["main_road",["v"]],\
 	["main_road",["h"]]
-	]:
-		var _s = load("res://Level/GenMod/"+i[0]+".gd")
-		_h.set_script(_s)
-		_h.init(i[1])
-		_h._ready()
+	])
 	# Full map iteration
 	for x in range(map_size.x):
 		for y in range(map_size.x):
 			# GenMod for each cell
 			# after 'in' pass a array of sorted scripts in Level/GenMod
-			for i in [\
+			_gen_mods([\
 			["tree",[x,y]]\
-			]:
-				var _s = load("res://Level/GenMod/"+i[0]+".gd")
-				_h.set_script(_s)
-				_h.init(i[1])
-				_h._ready()
+			])
 			Economy.add_entitie("Grass",[x,y])
-
 	# here will be more complex GenMods wich depends
 	# on each other and/or need multiple iterations,
 	# working on threads, etc.
-	
+	_gen_mods([])
 # A framework func wich allow to direct add a cells to multiple TileMaps,
 # with various types of cells, layers etc. Data are passed in ar=[tile1[],tile2[]]
 # where tile* is an array [x,y, layer (Level's Tilemap's name as str()), type]
@@ -66,3 +57,10 @@ func _add(c):
 	
 	for i in c:
 		get_node(i[2]).set_cell(i[0],i[1],i[3])
+
+func _gen_mods(arr):
+	for i in arr:
+		var _s = load("res://Level/GenMod/"+i[0]+".gd")
+		_h.set_script(_s)
+		_h.init(i[1])
+		_h._ready()

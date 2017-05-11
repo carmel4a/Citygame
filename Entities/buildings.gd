@@ -9,11 +9,11 @@ class House:\
 		var y = xy[1]
 		if !Global.Level._content[x][y].has("House") and\
 		!Global.Level._content[x][y].has("Trees") and\
+		!Global.Level._content[x][y].has("Road") and\
 		!Global.Level._content[x][y].has("River"):
 			Global.Level._content[x][y].append("House")
 			LevelState.add_cell([[x,y,"Items",0]])
-		
-		_done = true
+			_done = true
 
 	func _ready():
 		
