@@ -1,5 +1,7 @@
 extends Node
 
+var tooltip = preload("res://Tooltip/Tooltip.tscn")
+
 func generate_turn_alerts():
 	
 	generate_alert("Init")
@@ -17,3 +19,9 @@ func generate_alert(ty):
 	_b.type = ty
 	_b.show()
 	Global.UI.get_node("Alerts/AlertsArray").add_child(_b)
+
+func tooltip(name):
+	
+	var _t = tooltip.instance()
+	_t.set_name(name)
+	Global.HUD.add_child(_t)

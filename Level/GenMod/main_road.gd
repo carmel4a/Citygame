@@ -12,11 +12,11 @@ func _ready():
 	if d=="v":
 		_sl = Vector2(rand_range(0,map_size.x),0).floor()
 		
-		_el = Vector2(rand_range(0,map_size.x),map_size.y-1).floor()
+		_el = Vector2(rand_range(0,map_size.x),map_size.y).floor()
 	if d=="h":
-		_sl = Vector2(1,rand_range(0,map_size.y)).floor()
+		_sl = Vector2(0,rand_range(0,map_size.y)).floor()
 		
-		_el = Vector2(map_size.x-1,rand_range(0,map_size.y)).floor()
+		_el = Vector2(map_size.x,rand_range(0,map_size.y)).floor()
 	var _ar = [_sl,_el]
 	var _bp = Curve2D.new()
 	_bp.set_bake_interval(0.99)

@@ -1,6 +1,6 @@
 extends Node
 
-class House:\
+class House:
 
 	var _done = false
 	
@@ -11,10 +11,11 @@ class House:\
 		!Global.Level._content[x][y].has("Trees") and\
 		!Global.Level._content[x][y].has("Road") and\
 		!Global.Level._content[x][y].has("River"):
-			Global.Level._content[x][y].append("House")
+			Global.Level._content[x][y].append({"House":self})
 			LevelState.add_cell([[x,y,"Items",0]])
+			
 			_done = true
-
+	
 	func _ready():
 		
 		if _done:
