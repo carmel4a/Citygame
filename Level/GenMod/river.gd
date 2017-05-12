@@ -30,18 +30,31 @@ func _ready():
 	_p.set_bake_interval(0.99)
 	_bp.add_point(_ar[0])
 	_bp.add_point(_ar[1])
-	var _d = round(rand_range(-50,50))
-	_bp.add_point(Math._get_middle(_bp.get_point_pos(0),_bp.get_point_pos(1))+(Math._get_v_fromv(_bp.get_point_pos(0),_bp.get_point_pos(1)).normalized().tangent())*_d,\
+	var ok = false
+	var _point
+	while !ok:
+		var _d = round(rand_range(-50,50))
+		_point = Math._get_middle(_bp.get_point_pos(0),_bp.get_point_pos(1))+(Math._get_v_fromv(_bp.get_point_pos(0),_bp.get_point_pos(1)).normalized().tangent())*_d
+		if _point.x >= 0 and _point.y >= 0 and _point.x < map_size.x and _point.y < map_size.x:
+			ok = true
+	ok = false
+	_bp.add_point(_point,\
 		Vector2(0,0),\
 		Vector2(0,0),\
 		1)
 	for i in range(4):
 		for j in range(1,_bp.get_point_count()-1,2):
-			_d = round(rand_range(-10,10))
-			_bp.add_point(Math._get_middle(_bp.get_point_pos(j),_bp.get_point_pos(j+1))+(Math._get_v_fromv(_bp.get_point_pos(j),_bp.get_point_pos(j+1)).normalized().tangent())*_d,\
-		Vector2(0,0),\
-		Vector2(0,0),\
-		j+1)
+			while !ok:
+				var _d = round(rand_range(-10,10))
+				_point = Math._get_middle(_bp.get_point_pos(j),_bp.get_point_pos(j+1))+(Math._get_v_fromv(_bp.get_point_pos(j),_bp.get_point_pos(j+1)).normalized().tangent())*_d
+				print(_point)
+				if _point.x >= 0 and _point.y >= 0 and _point.x < map_size.x and _point.y < map_size.x:
+					ok = true
+			ok = false
+			_bp.add_point(_point,\
+				Vector2(0,0),\
+				Vector2(0,0),\
+				j+1)
 	for i in range(_bp.get_point_count()-1):
 		_p.add_point(Math._get_middle(_bp.get_point_pos(i+1),_bp.get_point_pos(i)),\
 		Vector2(0,0),\

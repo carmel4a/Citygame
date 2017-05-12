@@ -9,11 +9,12 @@ func new_game():
 	GameState.set_state("begin")
 
 func _enter_tree():
-	
+#	vseed = 1146044083  to test seeds
 	if vseed == -1:
 		randomize()
 		vseed = randi()
 	seed(vseed)
+	print ("Seed: ",vseed)
 
 func _ready():
 	
