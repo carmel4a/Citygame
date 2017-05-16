@@ -4,24 +4,24 @@ class Road:
 	func init(xy):
 		var x = xy[0]
 		var y = xy[1]
-		if !Global.Level._content[x][y].has("Road") and\
-		!Global.Level._content[x][y].has("Trees") and\
-		!Global.Level._content[x][y].has("House") and\
-		!Global.Level._content[x][y].has("River"):
-			Global.Level._content[x][y].append("Road")
+		if !Global.Level.content_has(x,y,"Road") and\
+		!Global.Level.content_has(x,y,"Trees") and\
+		!Global.Level.content_has(x,y,"House") and\
+		!Global.Level.content_has(x,y,"River"):
+			!Global.content(Vector2(x,y)).append({"Road":self})
 			update_road(x,y)
 			var _s = [false,false,false,false]
 			if x > 0:
-				if Global.Level._content[x-1][y].has("Road"):
+				if Global.Level.content_has(x-1,y,"Road"):
 					_s[0] = true
 			if y > 0:
-				if Global.Level._content[x][y-1].has("Road"):
+				if Global.Level.content_has(x,y-1,"Road"):
 					_s[1] = true
 			if x+1 < Global.Level._content.size():
-				if Global.Level._content[x+1][y].has("Road"):
+				if Global.Level.content_has(x+1,y,"Road"):
 					_s[2] = true
 			if x < Global.Level._content.size() and y+1 < Global.Level._content[x].size():
-				if Global.Level._content[x][y+1].has("Road"):
+				if Global.Level.content_has(x,y+1,"Road"):
 					_s[3] = true
 			if _s[0]:
 				update_road(x-1,y)
@@ -42,16 +42,16 @@ class Road:
 	func update_road(x,y):
 		var _s = [false,false,false,false]
 		if x > 0:
-			if Global.Level._content[x-1][y].has("Road"):
+			if Global.Level.content_has(x-1,y,"Road"):
 				_s[0] = true
 		if y > 0:
-			if Global.Level._content[x][y-1].has("Road"):
+			if Global.Level.content_has(x,y-1,"Road"):
 				_s[1] = true
 		if x+1 < Global.Level._content.size():
-			if Global.Level._content[x+1][y].has("Road"):
+			if Global.Level.content_has(x+1,y,"Road"):
 				_s[2] = true
 		if x < Global.Level._content.size() and y+1 < Global.Level._content[x].size():
-			if Global.Level._content[x][y+1].has("Road"):
+			if Global.Level.content_has(x,y+1,"Road"):
 				_s[3] = true
 		LevelState.add_cell([[x,y,"Roads",6]])
 		if _s[0] or _s[2]:

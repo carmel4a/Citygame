@@ -54,12 +54,11 @@ func _ready():
 		if _content.size()>_bp.get_baked_points()[i].x and\
 		_content[_bp.get_baked_points()[i].x].size()>_bp.get_baked_points()[i].y:
 			Economy.add_entitie("Road",[_bp.get_baked_points()[i].x,_bp.get_baked_points()[i].y])
-			_content[_bp.get_baked_points()[i].x][_bp.get_baked_points()[i].y].append("Road")
 			if _bp.get_baked_points()[i].x > 0 and _bp.get_baked_points()[i].y > 0:
 				if (floor(_bp.get_baked_points()[i-1].x) != floor(_bp.get_baked_points()[i].x)) and (floor(_bp.get_baked_points()[i-1].y) != floor(_bp.get_baked_points()[i].y)):
 					if _bp.get_baked_points()[i].x-_bp.get_baked_points()[i-1].x>=0:
 						Economy.add_entitie("Road",[_bp.get_baked_points()[i].x-1,_bp.get_baked_points()[i].y])
-						_content[_bp.get_baked_points()[i].x-1][_bp.get_baked_points()[i].y].append("Road")
+						
 					else:
 						Economy.add_entitie("Road",[_bp.get_baked_points()[i].x+1,_bp.get_baked_points()[i].y])
-						_content[_bp.get_baked_points()[i].x+1][_bp.get_baked_points()[i].y].append("Road")
+						

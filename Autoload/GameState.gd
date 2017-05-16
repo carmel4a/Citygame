@@ -47,13 +47,13 @@ func p_begin():
 	var _mp = Global.Game.get_global_mouse_pos()
 	Global.Level.get_node("Helpers/start_helper").set_region_rect(Rect2(Vector2(32,0),Vector2(32,32)))
 	if _bef_ng == true:
-		if Global.content(Vector2(_mp/64).floor()).has("Road"):
-
+		if Global.Level.content_has(floor(_mp.x/64),floor(_mp.y/64),"Road"):
+			
 			if Global.Level.get_node("Roads").get_cellv((_mp/64).floor()) == 0 and\
-			!Global.content((_mp/64).floor()+Vector2(0,1)).has("House") and \
-			!Global.content((_mp/64).floor()+Vector2(0,1)).has("Trees") and \
-			!Global.content((_mp/64).floor()-Vector2(0,1)).has("House") and \
-			!Global.content((_mp/64).floor()-Vector2(0,1)).has("Trees"):
+			!Global.Level.content_has(floor(_mp.x/64),floor(_mp.y/64)+1,"House") and \
+			!Global.Level.content_has(floor(_mp.x/64),floor(_mp.y/64)+1,"Trees") and \
+			!Global.Level.content_has(floor(_mp.x/64),floor(_mp.y/64)-1,"House") and \
+			!Global.Level.content_has(floor(_mp.x/64),floor(_mp.y/64)-1,"Trees"):
 				Global.Helpers.get_node("start_helper").set_region_rect(Rect2(Vector2(0,0),Vector2(32,32)))
 				if Input.is_mouse_button_pressed(1):
 					Economy.add_entitie("House",[floor(_mp.x/64),floor(_mp.y/64)+1])
@@ -63,7 +63,7 @@ func p_begin():
 					Global.HUD.get_node("start_mssg").free()
 					Global.Helpers.del_map_helper("start_helper")
 					Global.UI.get_node("Stats/NextTurn").set_disabled(false)
-					set_state("idle")
+					set_state("in_game")
 			elif Global.Level.get_node("Roads").get_cell((_mp/64).floor().x,(_mp/64).floor().y) == 1 and \
 			!Global.content((_mp/64).floor()+Vector2(1,0)).has("House") and \
 			!Global.content((_mp/64).floor()+Vector2(1,0)).has("Trees") and \
@@ -78,4 +78,30 @@ func p_begin():
 					Global.Level.get_node("Helpers").del_map_helper("start_helper")
 					Global.HUD.get_node("start_mssg").free()
 					Global.UI.get_node("Stats/NextTurn").set_disabled(false)
-					set_state("idle")
+					set_state("in_game")
+
+func in_game():
+	Popups.tooltip("Tooltip")
+
+func p_in_game():
+	var _mp = Global.Game.get_global_mouse_pos()
+	var _lmp = get_tree().get_root().get_mouse_pos()
+	if Input.is_mouse_button_pressed(1):
+		Global.HUD.get_node("Tooltip").set_pos(_lmp.floor())
+#		Global.HUD.get_node("Tooltip").set_global_pos(Vector2(200,200))
+#		Global.HUD.get_node("Tooltip").set_pos(_mp)
+		Global.HUD.get_node("Tooltip").preupdate()
+		Global.HUD.get_node("Tooltip").RTL.clear()
+		var _f = true
+		for i in Global.content(Vector2(_mp/64).floor()):
+			if _f == false:
+				Global.HUD.get_node("Tooltip").RTL.newline()
+			_f = false
+			Global.HUD.get_node("Tooltip").RTL.add_text(i.keys()[0])
+			Global.HUD.get_node("Tooltip").RTL.add_text(":")
+#			Global.HUD.get_node("Tooltip").RTL.add_text(str(i.values()[0]))
+			Global.HUD.get_node("Tooltip").RTL.add_text(str(_mp/64))
+			print(i)
+			print("a")
+		print("__")
+		Global.HUD.get_node("Tooltip").update()

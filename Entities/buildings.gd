@@ -7,11 +7,11 @@ class House:
 	func init(xy):
 		var x = xy[0]
 		var y = xy[1]
-		if !Global.Level._content[x][y].has("House") and\
-		!Global.Level._content[x][y].has("Trees") and\
-		!Global.Level._content[x][y].has("Road") and\
-		!Global.Level._content[x][y].has("River"):
-			Global.Level._content[x][y].append({"House":self})
+		if !Global.Level.content_has(x,y,"House") and\
+		!Global.Level.content_has(x,y,"Trees") and\
+		!Global.Level.content_has(x,y,"Road") and\
+		!Global.Level.content_has(x,y,"River"):
+			Global.content(Vector2(x,y)).append({"House":self})
 			LevelState.add_cell([[x,y,"Items",0]])
 			
 			_done = true

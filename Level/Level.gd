@@ -16,7 +16,7 @@ func _ready():
 		_content.append([])
 		for y in range(map_size.y):
 			_content[x].append([])
-			_content[x][y].append([])
+			
 			# That +1 must occur, because of that,
 			# first free a* ID starts on 1.
 			var _p = Math._2D_1D(Vector2(x,y),map_size.x)
@@ -64,3 +64,9 @@ func _gen_mods(arr):
 		_h.set_script(_s)
 		_h.init(i[1])
 		_h._ready()
+		
+func content_has(x,y,s):
+	for i in _content[x][y]:
+		if i.keys()[0] == s:
+			return (true)
+	return (false)

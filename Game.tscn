@@ -4,8 +4,8 @@
 [ext_resource path="res://Level/Level.gd" type="Script" id=2]
 [ext_resource path="res://Tiles/Grass.tres" type="TileSet" id=3]
 [ext_resource path="res://Tiles/roads.tres" type="TileSet" id=4]
-[ext_resource path="res://Tiles/items.tres" type="TileSet" id=5]
-[ext_resource path="res://Tiles/Water.tres" type="TileSet" id=6]
+[ext_resource path="res://Tiles/Water.tres" type="TileSet" id=5]
+[ext_resource path="res://Tiles/items.tres" type="TileSet" id=6]
 [ext_resource path="res://Tiles/Trees.tres" type="TileSet" id=7]
 [ext_resource path="res://UI/Hepers.gd" type="Script" id=8]
 [ext_resource path="res://UI/UI.tscn" type="PackedScene" id=9]
@@ -21,7 +21,6 @@ vseed = -1
 
 [node name="Level" type="Node2D" parent="."]
 
-editor/display_folded = true
 script/script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -71,13 +70,13 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Items" type="TileMap" parent="Level"]
+[node name="Water" type="TileMap" parent="Level"]
 
-transform/scale = Vector2( 4, 4 )
+transform/scale = Vector2( 2, 2 )
 mode = 0
 tile_set = ExtResource( 5 )
-cell/size = Vector2( 16, 16 )
-cell/quadrant_size = 16
+cell/size = Vector2( 32, 32 )
+cell/quadrant_size = 42
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 cell/half_offset = 2
 cell/tile_origin = 0
@@ -93,13 +92,13 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Water" type="TileMap" parent="Level"]
+[node name="Items" type="TileMap" parent="Level"]
 
 transform/scale = Vector2( 2, 2 )
 mode = 0
 tile_set = ExtResource( 6 )
 cell/size = Vector2( 32, 32 )
-cell/quadrant_size = 42
+cell/quadrant_size = 32
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 cell/half_offset = 2
 cell/tile_origin = 0
@@ -140,6 +139,9 @@ __meta__ = {
 [node name="Helpers" type="Node2D" parent="Level"]
 
 script/script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -151,7 +153,5 @@ scale = Vector2( 1, 1 )
 [node name="UI" parent="HUD" instance=ExtResource( 9 )]
 
 [node name="Camera" parent="." instance=ExtResource( 10 )]
-
-edge = true
 
 

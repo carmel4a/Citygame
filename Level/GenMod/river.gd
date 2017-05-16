@@ -8,9 +8,7 @@ func init(_):
 func _ready():
 	
 	var _s1 = randi()%4
-	var _sl = Vector2()
-	var _el = Vector2()
-	var _ar = [_sl,_el]
+	var _ar = [Vector2(),Vector2()]
 	for i in range(2):
 		var _s2 = randi()%4
 		while _s1 == _s2:
@@ -21,9 +19,9 @@ func _ready():
 		if _s2 == 1:
 			_ar[i] = Vector2(rand_range(0,map_size.x),0).floor()
 		if _s2 == 2:
-			_ar[i] = Vector2(map_size.x-1,rand_range(0,map_size.y)).floor()
+			_ar[i] = Vector2(map_size.x,rand_range(0,map_size.y)).floor()
 		if _s2 == 3:
-			_ar[i] = Vector2(rand_range(0,map_size.x),map_size.y-1).floor()
+			_ar[i] = Vector2(rand_range(0,map_size.x),map_size.y).floor()
 	var _bp = Curve2D.new()
 	var _p = Curve2D.new()
 	_bp.set_bake_interval(0.99)
@@ -47,7 +45,6 @@ func _ready():
 			while !ok:
 				var _d = round(rand_range(-10,10))
 				_point = Math._get_middle(_bp.get_point_pos(j),_bp.get_point_pos(j+1))+(Math._get_v_fromv(_bp.get_point_pos(j),_bp.get_point_pos(j+1)).normalized().tangent())*_d
-				print(_point)
 				if _point.x >= 0 and _point.y >= 0 and _point.x < map_size.x and _point.y < map_size.x:
 					ok = true
 			ok = false
@@ -67,11 +64,11 @@ func _ready():
 		if _content.size()>i.floor().x and\
 		_content[i.floor().x].size()>i.floor().y:
 			
-			_content[i.floor().x][i.floor().y].append("River")
+			
 			if (i.floor().x+1 < _content.size()):
-				_content[i.floor().x+1][i.floor().y].append("River")
+				
 				Economy.add_entitie("River",[i.floor().x+1,i.floor().y])
 			if (i.floor().y+1 < _content[i.floor().x].size()):
-				_content[i.floor().x][i.floor().y+1].append("River")
+				
 				Economy.add_entitie("River",[i.floor().x,i.floor().y+1])
 			Economy.add_entitie("River",[i.floor().x,i.floor().y])
