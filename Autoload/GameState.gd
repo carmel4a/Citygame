@@ -62,8 +62,8 @@ func p_begin():
 					Global.UI.get_node("Stats/NextTurn").set_disabled(false)
 					set_state("in_game")
 			elif Global.Level.get_node("Roads").get_cell((_mp/64).floor().x,(_mp/64).floor().y) == 1 and \
-			Global.Level.content_has_any(floor(_mp.x/64)+1,floor(_mp.y/64)+1,["House","Trees"]) == false and \
-			Global.Level.content_has_any(floor(_mp.x/64)-1,floor(_mp.y/64)-1,["House","Trees"]) == false:
+			Global.Level.content_has_any(floor(_mp.x/64)+1,floor(_mp.y/64),["House","Trees"]) == false and \
+			Global.Level.content_has_any(floor(_mp.x/64)-1,floor(_mp.y/64),["House","Trees"]) == false:
 				Global.Helpers.get_node("start_helper").set_region_rect(Rect2(Vector2(0,0),Vector2(32,32)))
 				if Input.is_mouse_button_pressed(1):
 					Economy.add_entitie("House",[floor(_mp.x/64)+1,floor(_mp.y/64)])
