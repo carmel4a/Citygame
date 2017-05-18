@@ -32,8 +32,8 @@ class River:
 		
 		var x = xy[0]
 		var y = xy[1]
-		if !Global.Level.content_has(x,y,"Water"):
-			Global.content(Vector2(x,y)).append({"Water":self})
+		if !Global.Level.content_has(x,y,"River"):
+			Global.content(Vector2(x,y)).append({"River":self})
 			LevelState.add_cell([[x,y,"Water",0]])
 			_done = true
 	

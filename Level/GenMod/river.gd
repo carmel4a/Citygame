@@ -65,10 +65,12 @@ func _ready():
 		_content[i.floor().x].size()>i.floor().y:
 			
 			
-			if (i.floor().x+1 < _content.size()):
-				
+			if i.floor().x+1 < _content.size():
 				Economy.add_entitie("River",[i.floor().x+1,i.floor().y])
-			if (i.floor().y+1 < _content[i.floor().x].size()):
-				
+			if i.floor().y+1 < _content[i.floor().x].size():
 				Economy.add_entitie("River",[i.floor().x,i.floor().y+1])
+			if i.floor().x-1 >= 0:
+				Economy.add_entitie("River",[i.floor().x-1,i.floor().y])
+			if i.floor().y-1 >= 0:
+				Economy.add_entitie("River",[i.floor().x,i.floor().y-1])
 			Economy.add_entitie("River",[i.floor().x,i.floor().y])
