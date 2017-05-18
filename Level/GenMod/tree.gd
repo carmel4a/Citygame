@@ -12,9 +12,7 @@ func init(xy):
 func _ready():
 	
 	if randf() > 0.95 and\
-		!Global.Level.content_has(x,y,"River") and\
-		!Global.Level.content_has(x,y,"Road") and\
-		!Global.Level.content_has(x,y,"House") and\
+		Global.Level.content_has_any(x,y,["River","Road","House"]) == false and\
 		x>=0 and\
 		y>=0 and\
 		_content.size()>=x and\
@@ -26,9 +24,7 @@ func _ready():
 				_content.size()>i[0] and\
 				_content[x].size()>i[1]:
 					if randf() > 0.7 and\
-					!Global.Level.content_has(i[0],i[1],"River") and\
-					!Global.Level.content_has(i[0],i[1],"House") and\
-					!Global.Level.content_has(i[0],i[1],"Road"):
+					Global.Level.content_has_any(i[0],i[1],["River","House","Road"]) == false:
 						Economy.add_entitie("Trees",[i[0],i[1]])
 			for i in [[x+2,y],[x-2,y],[x,y+2],[x,y-2]]:
 				if i[0] >= 0 and \
@@ -36,9 +32,7 @@ func _ready():
 				_content.size()>i[0] and\
 				_content[x].size()>i[1]:
 					if randf() > 0.6 and\
-					!Global.Level.content_has(i[0],i[1],"River") and\
-					!Global.Level.content_has(i[0],i[1],"House") and\
-					!Global.Level.content_has(i[0],i[1],"Road"):
+					Global.Level.content_has_any(i[0],i[1],["River","House","Road"]) == false:
 						Economy.add_entitie("Trees",[i[0],i[1]])
 			for i in [[x+1,y+1],[x-1,y-1],[x+1,y-1],[x-1,y+1]]:
 				if i[0] >= 0 and \
@@ -46,7 +40,5 @@ func _ready():
 				_content.size()>i[0] and\
 				_content[x].size()>i[1]:
 					if randf() > 0.5 and\
-					!Global.Level.content_has(i[0],i[1],"River") and\
-					!Global.Level.content_has(i[0],i[1],"House") and\
-					!Global.Level.content_has(i[0],i[1],"Road"):
+					Global.Level.content_has_any(i[0],i[1],["River","House","Road"]) == false:
 						Economy.add_entitie("Trees",[i[0],i[1]])

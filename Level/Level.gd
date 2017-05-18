@@ -64,9 +64,23 @@ func _gen_mods(arr):
 		_h.set_script(_s)
 		_h.init(i[1])
 		_h._ready()
-		
+
+
 func content_has(x,y,s):
+	
 	for i in _content[x][y]:
 		if i.keys()[0] == s:
-			return (true)
-	return (false)
+			return(true)
+	return(false)
+
+# Get position of tile, and array of strings to check.
+# Return strings wich are in tile, or false if there's any of them.
+func content_has_any(x,y,s):
+	var _r = []
+	for i in s:
+		for j in _content[x][y]:
+			if j.keys()[0] == i:
+				_r.append(s)
+	if _r.size() == 0:
+		return(false)
+	return(_r)

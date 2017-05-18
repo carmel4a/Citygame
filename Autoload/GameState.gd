@@ -48,12 +48,9 @@ func p_begin():
 	Global.Level.get_node("Helpers/start_helper").set_region_rect(Rect2(Vector2(32,0),Vector2(32,32)))
 	if _bef_ng == true:
 		if Global.Level.content_has(floor(_mp.x/64),floor(_mp.y/64),"Road"):
-			
 			if Global.Level.get_node("Roads").get_cellv((_mp/64).floor()) == 0 and\
-			!Global.Level.content_has(floor(_mp.x/64),floor(_mp.y/64)+1,"House") and \
-			!Global.Level.content_has(floor(_mp.x/64),floor(_mp.y/64)+1,"Trees") and \
-			!Global.Level.content_has(floor(_mp.x/64),floor(_mp.y/64)-1,"House") and \
-			!Global.Level.content_has(floor(_mp.x/64),floor(_mp.y/64)-1,"Trees"):
+			Global.Level.content_has_any(floor(_mp.x/64),floor(_mp.y/64)+1,["House","Trees"]) == false and \
+			Global.Level.content_has_any(floor(_mp.x/64),floor(_mp.y/64)-1,["House","Trees"]) == false:
 				Global.Helpers.get_node("start_helper").set_region_rect(Rect2(Vector2(0,0),Vector2(32,32)))
 				if Input.is_mouse_button_pressed(1):
 					Economy.add_entitie("House",[floor(_mp.x/64),floor(_mp.y/64)+1])
@@ -65,10 +62,8 @@ func p_begin():
 					Global.UI.get_node("Stats/NextTurn").set_disabled(false)
 					set_state("in_game")
 			elif Global.Level.get_node("Roads").get_cell((_mp/64).floor().x,(_mp/64).floor().y) == 1 and \
-			!Global.content((_mp/64).floor()+Vector2(1,0)).has("House") and \
-			!Global.content((_mp/64).floor()+Vector2(1,0)).has("Trees") and \
-			!Global.content((_mp/64).floor()-Vector2(1,0)).has("House") and \
-			!Global.content((_mp/64).floor()-Vector2(1,0)).has("Trees"):
+			Global.Level.content_has_any(floor(_mp.x/64)+1,floor(_mp.y/64)+1,["House","Trees"]) == false and \
+			Global.Level.content_has_any(floor(_mp.x/64)-1,floor(_mp.y/64)-1,["House","Trees"]) == false:
 				Global.Helpers.get_node("start_helper").set_region_rect(Rect2(Vector2(0,0),Vector2(32,32)))
 				if Input.is_mouse_button_pressed(1):
 					Economy.add_entitie("House",[floor(_mp.x/64)+1,floor(_mp.y/64)])
@@ -101,7 +96,4 @@ func p_in_game():
 			Global.HUD.get_node("Tooltip").RTL.add_text(":")
 #			Global.HUD.get_node("Tooltip").RTL.add_text(str(i.values()[0]))
 			Global.HUD.get_node("Tooltip").RTL.add_text(str(_mp/64))
-			print(i)
-			print("a")
-		print("__")
 		Global.HUD.get_node("Tooltip").update()
