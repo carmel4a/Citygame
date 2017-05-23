@@ -40,19 +40,23 @@ func _process(delta):
 func begin():
 	
 	Global.Helpers.add_map_helper("start_helper",preload("res://UI/map_icons/map_icons.png"),true,Rect2(Vector2(0,0),Vector2(32,32)))
+	var _s =\
+	"""Chose your start location. It must be:
+\t- straight road
+\t- no Forests on sides
+Valid location will be marked as green square."""
 	Popups.tooltip("start_mssg")
 	Global.HUD.get_node("start_mssg").set_pos(Vector2(50,50))
-	Global.HUD.get_node("start_mssg").RTL.add_text("Choose start location.")
-	Global.HUD.get_node("start_mssg").RTL.add_image(preload("res://UI/map_icons/map_icons.png"))
+	Global.HUD.get_node("start_mssg").width = 500
+	Global.HUD.get_node("start_mssg").set_text(_s)
 
 func p_begin():
 	
-	Global.Helpers.get_node("start_helper").set_pos(_mp/64)
 	Global.Helpers.get_node("start_helper").set_region_rect(Rect2(Vector2(32,0),Vector2(32,32)))
 	if Global.Level.content_has(floor(_mp.x/64),floor(_mp.y/64),"Road"):
 		if Global.Level.get_node("Roads").get_cellv((_mp/64).floor()) == 0 and\
-		Global.Level.content_has_any(floor(_mp.x/64),floor(_mp.y/64)+1,["House","Trees"]) == false and \
-		Global.Level.content_has_any(floor(_mp.x/64),floor(_mp.y/64)-1,["House","Trees"]) == false:
+		Global.Level.content_has_any(floor(_mp.x/64),floor(_mp.y/64)+1,["House","Trees","River"]) == false and \
+		Global.Level.content_has_any(floor(_mp.x/64),floor(_mp.y/64)-1,["House","Trees","River"]) == false:
 			Global.Helpers.get_node("start_helper").set_region_rect(Rect2(Vector2(0,0),Vector2(32,32)))
 			if klick[0]:
 				Economy.add_entitie("House",[floor(_mp.x/64),floor(_mp.y/64)+1])
@@ -62,8 +66,8 @@ func p_begin():
 				Global.UI.get_node("Stats/NextTurn").set_disabled(false)
 				set_state("in_game")
 		elif Global.Level.get_node("Roads").get_cell((_mp/64).floor().x,(_mp/64).floor().y) == 1 and \
-		Global.Level.content_has_any(floor(_mp.x/64)+1,floor(_mp.y/64),["House","Trees"]) == false and \
-		Global.Level.content_has_any(floor(_mp.x/64)-1,floor(_mp.y/64),["House","Trees"]) == false:
+		Global.Level.content_has_any(floor(_mp.x/64)+1,floor(_mp.y/64),["House","River"]) == false and \
+		Global.Level.content_has_any(floor(_mp.x/64)-1,floor(_mp.y/64),["House","River"]) == false:
 			Global.Helpers.get_node("start_helper").set_region_rect(Rect2(Vector2(0,0),Vector2(32,32)))
 			if klick[0]:
 				Economy.add_entitie("House",[floor(_mp.x/64)+1,floor(_mp.y/64)])
@@ -72,6 +76,7 @@ func p_begin():
 				Global.HUD.get_node("start_mssg").free()
 				Global.UI.get_node("Stats/NextTurn").set_disabled(false)
 				yield(get_tree(),"idle_frame")
+				klick[0] = false
 				set_state("in_game")
 
 func in_game():
@@ -90,7 +95,8 @@ func p_in_game():
 			Global.HUD.get_node("obj_lst").clear()
 			Global.HUD.get_node("obj_lst").set_pos(_lmp.floor())
 			for i in Global.content(Vector2(_mp/64).floor()):
-				Global.HUD.get_node("obj_lst").add_item(i.keys()[0])
+				if i.values()[0].get("tooltip") != null:
+					Global.HUD.get_node("obj_lst").add_item(i.keys()[0])
 			Global.HUD.get_node("obj_lst").popup()
 			if !Global.HUD.get_node("Tooltip").is_hidden():
 				Global.HUD.get_node("Tooltip").hide()

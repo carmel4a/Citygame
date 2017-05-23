@@ -14,15 +14,8 @@ onready var Entities = {\
 #"Bridge":[],\
 "House":[preload("res://Entities/buildings.gd")]
 }
-
-func content(v):
+# Get Level._content by Vector2D
+func content(vx,y = null):
 	
-	return(Level._content[v.x][v.y])
+	return(Level._content[vx.x][vx.y])
 
-func _ready():
-	
-	add_user_signal("done")
-
-func done():
-	
-	emit_signal("done")
