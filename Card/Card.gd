@@ -32,9 +32,10 @@ func _ready():
 		get_node("Card-Perks/Top-Bottons/VButtonArray/ButtonsGroup").add_child(_b)
 		get_node("Card-Perks/Top-Bottons/Top/Name").set_text(_content["title"])
 		get_node("Card-Perks/Top-Bottons/Text").set_text(_content["text"])
-	
+	set_size(Vector2(200,get_size().y))
 	set_process_input(true)
-	set_process(true)	
+	set_process(true)
+	set_process_unhandled_input(true)
 
 func _process(delta):
 
@@ -92,7 +93,7 @@ func _on_Option_button_selected( button_idx ):
 func _input_event(event):
 	
 	if event.type == InputEvent.MOUSE_BUTTON and event.button_index == 1:
-		if event.pressed:
+		if event.is_pressed():
 			if Rect2(Vector2(0,0),panel_size).has_point(event.pos) and dragging == false:
 				accept_event()
 				raise()
@@ -100,3 +101,4 @@ func _input_event(event):
 				_clicked_pt = get_local_mouse_pos()
 		else:
 			dragging = false
+

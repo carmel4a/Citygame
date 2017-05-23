@@ -2,6 +2,7 @@ extends Node
 
 class Grass:
 	var _done = false
+	var tooltip = "A Grassland"
 	func init(xy):
 		
 		var x = xy[0]
