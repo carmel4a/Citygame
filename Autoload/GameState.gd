@@ -83,17 +83,11 @@ func p_in_game():
 	var _lmp = get_tree().get_root().get_mouse_pos()
 	if Input.is_mouse_button_pressed(1):
 		Global.HUD.get_node("Tooltip").set_pos(_lmp.floor())
-#		Global.HUD.get_node("Tooltip").set_global_pos(Vector2(200,200))
-#		Global.HUD.get_node("Tooltip").set_pos(_mp)
-		Global.HUD.get_node("Tooltip").preupdate()
-		Global.HUD.get_node("Tooltip").RTL.clear()
 		var _f = true
+		var _s = ""
 		for i in Global.content(Vector2(_mp/64).floor()):
 			if _f == false:
-				Global.HUD.get_node("Tooltip").RTL.newline()
+				_s += "\n"
 			_f = false
-			Global.HUD.get_node("Tooltip").RTL.add_text(i.keys()[0])
-			Global.HUD.get_node("Tooltip").RTL.add_text(":")
-#			Global.HUD.get_node("Tooltip").RTL.add_text(str(i.values()[0]))
-			Global.HUD.get_node("Tooltip").RTL.add_text(str(_mp/64))
-		Global.HUD.get_node("Tooltip").update()
+			_s += (str(i.keys()[0]) + str(":") + str(_mp/64))
+		Global.HUD.get_node("Tooltip").set_text(_s)
