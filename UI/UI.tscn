@@ -7,7 +7,7 @@
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
-focus/stop_mouse = true
+focus/stop_mouse = false
 size_flags/horizontal = 1
 size_flags/vertical = 0
 margin/left = 0.0
@@ -21,7 +21,7 @@ __meta__ = {
 
 [node name="Alerts" type="ScrollContainer" parent="."]
 
-focus/ignore_mouse = false
+focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
@@ -35,7 +35,7 @@ scroll/vertical = true
 [node name="AlertsArray" type="VBoxContainer" parent="Alerts"]
 
 focus/ignore_mouse = false
-focus/stop_mouse = false
+focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 3
 margin/left = 0.0
@@ -97,9 +97,9 @@ max_lines_visible = -1
 
 [node name="Cards" type="HBoxContainer" parent="."]
 
-focus/ignore_mouse = false
+focus/ignore_mouse = true
 focus/stop_mouse = false
-size_flags/horizontal = 2
+size_flags/horizontal = 0
 size_flags/vertical = 2
 margin/left = 94.0
 margin/top = 160.0

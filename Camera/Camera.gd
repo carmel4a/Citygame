@@ -72,7 +72,7 @@ func _fixed_process(delta):
 	
 	# Control by right mouse button; draging. Have no idea how it is working.
 	if drag and LevelState._update_helper[0]==false:
-		if Input.is_mouse_button_pressed(BUTTON_RIGHT):
+		if klick:
 			camera_movement = prev_mouse_pos - get_viewport().get_mouse_pos()
 	
 	# Update position of the camera.
@@ -84,13 +84,21 @@ func _fixed_process(delta):
 		set_pos(get_pos() + camera_movement * get_zoom())
 	prev_mouse_pos = get_viewport().get_mouse_pos()
 
+var klick = false
 func _input(event):
 #	[!]Checking if user used mouse wheel. ! not handled by @ImputMap.
-	if (event.type == InputEvent.MOUSE_BUTTON) and (wheel == true):
-		# Checing if potential zoom won't zoom under 0; in that cause Engine'll flip screen.
-		if ((event.button_index == BUTTON_WHEEL_UP) and ((camera_zoom.x - camera_zoom_speed.x) > 0) and ((camera_zoom.y - camera_zoom_speed.y) > 0)):
-			camera_zoom -= camera_zoom_speed
-			set_zoom(camera_zoom)
-		if event.button_index == BUTTON_WHEEL_DOWN and ((camera_zoom.x + camera_zoom_speed.x) < zoom_out_limit) and ((camera_zoom.y + camera_zoom_speed.y) < zoom_out_limit):
-			camera_zoom += camera_zoom_speed
-			set_zoom(camera_zoom)
+#	klick = false
+	if (event.type == InputEvent.MOUSE_BUTTON):
+		if wheel == true:
+			# Checing if potential zoom won't zoom under 0; in that cause Engine'll flip screen.
+			if ((event.button_index == BUTTON_WHEEL_UP) and ((camera_zoom.x - camera_zoom_speed.x) > 0) and ((camera_zoom.y - camera_zoom_speed.y) > 0)):
+				camera_zoom -= camera_zoom_speed
+				set_zoom(camera_zoom)
+			if event.button_index == BUTTON_WHEEL_DOWN and ((camera_zoom.x + camera_zoom_speed.x) < zoom_out_limit) and ((camera_zoom.y + camera_zoom_speed.y) < zoom_out_limit):
+				camera_zoom += camera_zoom_speed
+				set_zoom(camera_zoom)
+		if event.is_pressed() == true and event.button_index==2:
+			klick = true
+#			get_tree().set_input_as_handled()
+		else:
+			klick = false

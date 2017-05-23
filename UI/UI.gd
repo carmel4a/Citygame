@@ -7,8 +7,7 @@ func _ready():
 
 	get_node("Stats/NextTurn").connect("button_down",get_node("../../"),"_next_turn")
 	_update(["Stats/Label"])
-	set_process_input(true)
-	
+
 func _update(what):
 	
 	for i in what:
@@ -20,3 +19,6 @@ func add_card(what = null):
 	var _c = Card.instance()
 	_c._init(what)
 	get_node("Cards").add_child(_c)
+
+func _input_event(event):
+	return

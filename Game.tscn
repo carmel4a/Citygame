@@ -152,6 +152,8 @@ scale = Vector2( 1, 1 )
 
 [node name="UI" parent="HUD" instance=ExtResource( 9 )]
 
+focus/ignore_mouse = true
+
 [node name="Camera" parent="." instance=ExtResource( 10 )]
 
 
