@@ -34,8 +34,8 @@ scroll/vertical = true
 
 [node name="AlertsArray" type="VBoxContainer" parent="Alerts"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
+focus/ignore_mouse = true
+focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 3
 margin/left = 0.0

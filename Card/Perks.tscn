@@ -4,8 +4,8 @@
 
 [node name="Perks" type="GridContainer"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = false
+focus/ignore_mouse = true
+focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 214.0

@@ -58,18 +58,18 @@ func p_begin():
 		Global.Level.content_has_any(floor(_mp.x/64),floor(_mp.y/64)+1,["House","Trees","River"]) == false and \
 		Global.Level.content_has_any(floor(_mp.x/64),floor(_mp.y/64)-1,["House","Trees","River"]) == false:
 			Global.Helpers.get_node("start_helper").set_region_rect(Rect2(Vector2(0,0),Vector2(32,32)))
-			if klick[0]:
+			if klick[0] and klick[0] == "l":
 				Economy.add_entitie("House",[floor(_mp.x/64),floor(_mp.y/64)+1])
 				Economy.add_entitie("House",[floor(_mp.x/64),floor(_mp.y/64)-1])
 				Global.HUD.get_node("start_mssg").free()
 				Global.Helpers.del_map_helper("start_helper")
 				Global.UI.get_node("Stats/NextTurn").set_disabled(false)
-				set_state("in_game")
+				set_state("popup_content_menu")
 		elif Global.Level.get_node("Roads").get_cell((_mp/64).floor().x,(_mp/64).floor().y) == 1 and \
 		Global.Level.content_has_any(floor(_mp.x/64)+1,floor(_mp.y/64),["House","River"]) == false and \
 		Global.Level.content_has_any(floor(_mp.x/64)-1,floor(_mp.y/64),["House","River"]) == false:
 			Global.Helpers.get_node("start_helper").set_region_rect(Rect2(Vector2(0,0),Vector2(32,32)))
-			if klick[0]:
+			if klick[0] and klick[0] == "l":
 				Economy.add_entitie("House",[floor(_mp.x/64)+1,floor(_mp.y/64)])
 				Economy.add_entitie("House",[floor(_mp.x/64)-1,floor(_mp.y/64)])
 				Global.Level.get_node("Helpers").del_map_helper("start_helper")
@@ -77,9 +77,9 @@ func p_begin():
 				Global.UI.get_node("Stats/NextTurn").set_disabled(false)
 				yield(get_tree(),"idle_frame")
 				klick[0] = false
-				set_state("in_game")
+				set_state("popup_content_menu")
 
-func in_game():
+func popup_content_menu():
 	Popups.tooltip("Tooltip")
 	Global.HUD.get_node("Tooltip").hide()
 	var _hm = PopupMenu.new()
@@ -88,7 +88,7 @@ func in_game():
 	_hm.connect("about_to_show",self,"_pop_menu_opened")
 	Global.HUD.add_child(_hm)
 
-func p_in_game():
+func p_popup_content_menu():
 	
 	if klick[0]:
 		if klick[0] == "l":

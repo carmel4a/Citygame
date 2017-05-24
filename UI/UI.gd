@@ -19,6 +19,3 @@ func add_card(what = null):
 	var _c = Card.instance()
 	_c._init(what)
 	get_node("Cards").add_child(_c)
-
-func _input_event(event):
-	return
