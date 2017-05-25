@@ -47,6 +47,13 @@ class River:
 
 class Trees:
 	var _done = false
+	var wood = 10
+	var true_age
+	var age = -1
+	var age_names = ["young","medium","old"]
+	var tooltip =\
+"""Wood: %d
+Age: %s"""
 	func init(xy):
 		
 		var x = xy[0]
@@ -54,11 +61,25 @@ class Trees:
 		if !Global.Level.content_has(x,y,"Trees"):
 			Global.content(Vector2(x,y)).append({"Trees":self})
 			LevelState.add_cell([[x,y,"Trees",0]])
+			Global.Game.connect("next_turn",self,"next_turn")
 			_done = true
-	
+			
 	func _ready():
 		
 		if _done:
+			next_turn()
 			return(true)
 		else:
 			return(false)
+	
+	func next_turn():
+#		while true:
+#			age += 1
+#			tooltip =\
+#			"""Wood: %d
+#Age: %s""" % [wood,age_names[age]]
+#			yield(Global.Game,"next_turn")
+			age += 1
+			tooltip =\
+			"""Wood: %d
+Age: %s""" % [wood,age_names[age]]
