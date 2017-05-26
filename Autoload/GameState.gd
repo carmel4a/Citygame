@@ -1,25 +1,15 @@
 extends Node
 
 var _Turn = 0
-# authority
-var _Auth  = 10
+# authority: cur, delta
+var Auth  = [10,5]
 # difference of authority per turn
-var _d_Auth = 5
-var pop = [] # acc, delta, max
+var pop = [0,0,0] # cur, max, delta
 
 var _state = "begin" setget set_state
 var klick = [false,Vector2(-1,-1)]
 var _mp
 var _lmp
-func set_Auth_diff(v):
-	
-	_d_Auth = v
-	Global.UI._update(["Stats/Label"])
-
-func set_Auth(v):
-	
-	_Auth = v
-	Global.UI._update(["Stats/Label"])
 
 func set_state(_s):
 	
@@ -77,7 +67,6 @@ func p_begin():
 				Global.Level.get_node("Helpers").del_map_helper("start_helper")
 				Global.HUD.get_node("start_mssg").free()
 				Global.UI.get_node("Stats/NextTurn").set_disabled(false)
-				yield(get_tree(),"idle_frame")
 				klick[0] = false
 				set_state("popup_content_menu")
 
