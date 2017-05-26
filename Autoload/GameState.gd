@@ -12,7 +12,9 @@ var _mp
 var _lmp
 
 func set_state(_s):
-	
+	# XOR
+	if (_s!="begin" and _state!="idle") or (_s=="begin" and _state=="idle"):
+		call(str("e_"+_state))
 	_state = _s
 	if _s != "idle":
 		set_process(true)
@@ -25,6 +27,7 @@ func set_state(_s):
 func _process(delta):
 	_mp = Global.Game.get_global_mouse_pos()
 	_lmp = get_tree().get_root().get_mouse_pos()
+	Global.UI._update()
 	call(str("p_"+_state))
 	klick[0] = false
 	klick[1] = Vector2(-1,-1)
@@ -53,9 +56,6 @@ func p_begin():
 			if klick[0] and klick[0] == "l":
 				Economy.add_entitie("House",[floor(_mp.x/64),floor(_mp.y/64)+1])
 				Economy.add_entitie("House",[floor(_mp.x/64),floor(_mp.y/64)-1])
-				Global.HUD.get_node("start_mssg").free()
-				Global.Helpers.del_map_helper("start_helper")
-				Global.UI.get_node("Stats/NextTurn").set_disabled(false)
 				set_state("popup_content_menu")
 		elif Global.Level.get_node("Roads").get_cell((_mp/64).floor().x,(_mp/64).floor().y) == 1 and \
 		Global.Level.content_has_any(floor(_mp.x/64)+1,floor(_mp.y/64),["House","Trees","River"]) == false and \
@@ -64,15 +64,18 @@ func p_begin():
 			if klick[0] and klick[0] == "l":
 				Economy.add_entitie("House",[floor(_mp.x/64)+1,floor(_mp.y/64)])
 				Economy.add_entitie("House",[floor(_mp.x/64)-1,floor(_mp.y/64)])
-				Global.Level.get_node("Helpers").del_map_helper("start_helper")
-				Global.HUD.get_node("start_mssg").free()
-				Global.UI.get_node("Stats/NextTurn").set_disabled(false)
-				klick[0] = false
 				set_state("popup_content_menu")
+		Global.UI._update()
+
+func e_begin():
+	
+	Global.Helpers.del_map_helper("start_helper")
+	Global.HUD.get_node("start_mssg").free()
+	Global.UI.get_node("Stats/NextTurn").set_disabled(false)
 
 func popup_content_menu():
-	Popups.tooltip("Tooltip")
-	Global.HUD.get_node("Tooltip").hide()
+	Popups.tooltip("tooltip_man")
+	Global.HUD.get_node("tooltip_man").hide()
 	var _hm = PopupMenu.new()
 	_hm.set_name("obj_lst")
 	_hm.connect("item_pressed",self,"_pass_bbc")
@@ -91,38 +94,16 @@ func p_popup_content_menu():
 				Global.HUD.get_node("obj_lst").popup()
 			else:
 				Global.HUD.get_node("obj_lst").hide()
-			if !Global.HUD.get_node("Tooltip").is_hidden():
-				Global.HUD.get_node("Tooltip").hide()
-				Global.HUD.get_node("Tooltip").clear()
+			if !Global.HUD.get_node("tooltip_man").is_hidden():
+				Global.HUD.get_node("tooltip_man").hide()
+				Global.HUD.get_node("tooltip_man").clear()
 		if klick[0] == "r":
 			Global.HUD.get_node("obj_lst").hide()
-			Global.HUD.get_node("Tooltip").hide()
-#			Global.HUD.get_node("Tooltip").clear()
-var _klicked
-func _pass_bbc(i):
-	Global.HUD.get_node("Tooltip").show()
-	if Global.content((_klicked/64).floor())[i].values()[0].get("tooltip") != null:
-		Global.HUD.get_node("Tooltip").set_text(Global.content((_klicked/64).floor())[i].values()[0].get("tooltip"))
-		Global.HUD.get_node("Tooltip").show_modal()
-		Global.HUD.get_node("Tooltip").set_pos(_lmp)
+			Global.HUD.get_node("tooltip_man").hide()
 
-func _pop_menu_opened():
-	_klicked = _mp
-	
-var __was_pressed = false
-func _unhandled_input(event):
-	
-	if event.type==InputEvent.MOUSE_BUTTON:
-		if event.is_pressed() == true:
-			__was_pressed = true
-		elif event.is_pressed()==false and event.button_index==1 and __was_pressed == true:
-			klick[0] = "l"
-			klick[1] = event.global_pos
-			__was_pressed = false
-		elif event.is_pressed()==false and event.button_index==2 and __was_pressed == true:
-			klick[0] = "r"
-			klick[1] = event.global_pos
-			__was_pressed = false
+func e_popup_content_menu():
+	Global.HUD.get_node("tooltip_man").free()
+	Global.HUD.get_node("obj_lst").free()
 
 func layers():
 	Global.Helpers.delete_light_helpers()
@@ -142,3 +123,32 @@ func layers():
 
 func p_layers():
 	return
+
+func e_layers():
+	Global.Helpers.delete_light_helpers()
+
+var _klicked
+func _pass_bbc(i):
+	Global.HUD.get_node("tooltip_man").show()
+	if Global.content((_klicked/64).floor())[i].values()[0].get("tooltip") != null:
+		Global.HUD.get_node("tooltip_man").set_text(Global.content((_klicked/64).floor())[i].values()[0].get("tooltip"))
+		Global.HUD.get_node("tooltip_man").show_modal()
+		Global.HUD.get_node("tooltip_man").set_pos(_lmp)
+
+func _pop_menu_opened():
+	_klicked = _mp
+	
+var __was_pressed = false
+func _unhandled_input(event):
+	
+	if event.type==InputEvent.MOUSE_BUTTON:
+		if event.is_pressed() == true:
+			__was_pressed = true
+		elif event.is_pressed()==false and event.button_index==1 and __was_pressed == true:
+			klick[0] = "l"
+			klick[1] = event.global_pos
+			__was_pressed = false
+		elif event.is_pressed()==false and event.button_index==2 and __was_pressed == true:
+			klick[0] = "r"
+			klick[1] = event.global_pos
+			__was_pressed = false
