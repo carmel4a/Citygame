@@ -31,7 +31,7 @@ func _next_turn():
 	if GameState.pop[0] >= GameState.pop[1]:
 		GameState.pop[2] = round(GameState.pop[2]/4)
 	Popups.generate_turn_alerts()
-	
+	Global.UI._update()
 func random_seed():
 	vseed = randi()
 	seed(vseed)
