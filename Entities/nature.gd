@@ -79,7 +79,8 @@ Age: %s"""
 #			"""Wood: %d
 #Age: %s""" % [wood,age_names[age]]
 #			yield(Global.Game,"next_turn")
-			age += 1
+			if age != 2:
+				age += 1
 			tooltip =\
 			"""Wood: %d
 Age: %s""" % [wood,age_names[age]]

@@ -20,12 +20,16 @@ func _enter_tree():
 func _ready():
 	
 	new_game()
+	Global.UI._update()
 
 func _next_turn():
 	
 	GameState._Turn += 1
-	GameState.set_Auth(GameState._Auth + GameState._d_Auth)
 	emit_signal("next_turn")
+	GameState.Auth[0] += GameState.Auth[1]
+	GameState.pop[0] += GameState.pop[2]
+	if GameState.pop[0] >= GameState.pop[1]:
+		GameState.pop[2] = round(GameState.pop[2]/4)
 	Popups.generate_turn_alerts()
 	
 func random_seed():
