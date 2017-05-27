@@ -73,14 +73,8 @@ Age: %s"""
 			return(false)
 	
 	func next_turn():
-#		while true:
-#			age += 1
-#			tooltip =\
-#			"""Wood: %d
-#Age: %s""" % [wood,age_names[age]]
-#			yield(Global.Game,"next_turn")
-			if age != 2:
-				age += 1
-			tooltip =\
-			"""Wood: %d
+		if age != 2:
+			age += 1
+		tooltip =\
+		"""Wood: %d
 Age: %s""" % [wood,age_names[age]]

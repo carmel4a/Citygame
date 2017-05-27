@@ -132,7 +132,7 @@ func _pass_bbc(i):
 	Global.HUD.get_node("tooltip_man").show()
 	if Global.content((_klicked/64).floor())[i].values()[0].get("tooltip") != null:
 		Global.HUD.get_node("tooltip_man").set_text(Global.content((_klicked/64).floor())[i].values()[0].get("tooltip"))
-		Global.HUD.get_node("tooltip_man").show_modal()
+		Global.HUD.get_node("tooltip_man").show()
 		Global.HUD.get_node("tooltip_man").set_pos(_lmp)
 
 func _pop_menu_opened():

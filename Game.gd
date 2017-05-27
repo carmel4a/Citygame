@@ -26,9 +26,7 @@ func _next_turn():
 	
 	GameState._Turn += 1
 	GameState.Auth[0] += GameState.Auth[1]
-	GameState.pop[0] += GameState.pop[2]
-	if GameState.pop[0] >= GameState.pop[1]:
-		GameState.pop[2] = round(GameState.pop[2]/4)
+	GameState.pop[2] = 0
 	emit_signal("next_turn")
 	Popups.generate_turn_alerts()
 	Global.UI._update()
