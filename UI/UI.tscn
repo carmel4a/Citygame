@@ -7,9 +7,12 @@
 script/source = "extends VBoxContainer
 
 func _ready():
-	get_node(\"ItemList\").add_item(\"Trees\")
-	get_node(\"ItemList\").add_item(\"Road\")
+	for i in Global.Entities:
+		get_node(\"ItemList\").add_item(i)
+#	get_node(\"ItemList\").add_item(\"Trees\")
+#	get_node(\"ItemList\").add_item(\"Road\")
 	get_node(\"ItemList\").set_select_mode(1)
+	get_node(\"ItemList\").hide()
 	get_node(\"ItemList\").connect(\"multi_selected\",self,\"_set_state\")
 func _set_state(i,y):
 	GameState.set_state(\"layers\")
@@ -31,6 +34,7 @@ func _on_Button1_pressed():
 
 func _on_Button2_pressed():
 	get_node(\"../ItemList\").show()
+	GameState.set_state(\"layers\")
 "
 
 [node name="UI" type="Control"]

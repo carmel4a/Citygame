@@ -108,6 +108,7 @@ func e_popup_content_menu():
 func layers():
 	Global.Helpers.delete_light_helpers()
 	var _il = Global.UI.get_node("PanelContainer/VBoxContainer/ItemList")
+	_il.show()
 	var _si = _il.get_selected_items()
 	var _msx = Global.Level.map_size.x
 	var _msy = Global.Level.map_size.y
@@ -126,6 +127,7 @@ func p_layers():
 
 func e_layers():
 	Global.Helpers.delete_light_helpers()
+	Global.UI.get_node("PanelContainer/VBoxContainer/ItemList").hide()
 
 var _klicked
 func _pass_bbc(i):

@@ -41,7 +41,7 @@ func _ready():
 #	set_limit(2,Global.Level.map_size.x*(Global.Level.tile_size))
 #	set_limit(3,Global.Level.map_size.y*(Global.Level.tile_size))
 	set_fixed_process(true)
-	set_process_input(true)
+	set_process_unhandled_input(true)
 
 func _fixed_process(delta):
 	# Set camera movement to zero, and update camera speed.
@@ -85,7 +85,7 @@ func _fixed_process(delta):
 	prev_mouse_pos = get_viewport().get_mouse_pos()
 
 var klick = false
-func _input(event):
+func _unhandled_input(event):
 #	[!]Checking if user used mouse wheel. ! not handled by @ImputMap.
 #	klick = false
 	if (event.type == InputEvent.MOUSE_BUTTON):

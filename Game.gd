@@ -19,6 +19,8 @@ func _enter_tree():
 	
 func _ready():
 	
+	Popups.tooltip("tooltip_auto")
+	Global.HUD.get_node("tooltip_auto").hide()
 	new_game()
 	Global.UI._update()
 
