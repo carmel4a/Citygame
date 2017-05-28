@@ -91,6 +91,7 @@ func p_popup_content_menu():
 				for i in Global.content(Vector2(_mp/64).floor()):
 					if i.values()[0].get("tooltip") != null:
 						Global.HUD.get_node("obj_lst").add_item(i.keys()[0])
+						Global.HUD.get_node("obj_lst").add_item("Range")
 				Global.HUD.get_node("obj_lst").popup()
 			else:
 				Global.HUD.get_node("obj_lst").hide()
@@ -131,11 +132,14 @@ func e_layers():
 
 var _klicked
 func _pass_bbc(i):
-	Global.HUD.get_node("tooltip_man").show()
-	if Global.content((_klicked/64).floor())[i].values()[0].get("tooltip") != null:
-		Global.HUD.get_node("tooltip_man").set_text(Global.content((_klicked/64).floor())[i].values()[0].get("tooltip"))
+	if Global.HUD.get_node("obj_lst").get_item_text(i)!="Range":
 		Global.HUD.get_node("tooltip_man").show()
-		Global.HUD.get_node("tooltip_man").set_pos(_lmp)
+		if Global.content((_klicked/64).floor())[i].values()[0].get("tooltip") != null:
+			Global.HUD.get_node("tooltip_man").set_text(Global.content((_klicked/64).floor())[i].values()[0].get("tooltip"))
+			Global.HUD.get_node("tooltip_man").show()
+			Global.HUD.get_node("tooltip_man").set_pos(_lmp)
+	else:
+		Global.Helpers.show_range((_klicked/64).floor().x,(_klicked/64).floor().y)
 
 func _pop_menu_opened():
 	_klicked = _mp
