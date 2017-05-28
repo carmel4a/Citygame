@@ -162,7 +162,6 @@ flat = false
 
 [node name="ItemList" type="ItemList" parent="PanelContainer/VBoxContainer"]
 
-visibility/visible = false
 rect/min_size = Vector2( 0, 50 )
 focus/ignore_mouse = false
 focus/stop_mouse = true

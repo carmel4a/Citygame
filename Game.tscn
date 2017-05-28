@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=12 format=1]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://Level/Level.gd" type="Script" id=2]
@@ -9,7 +9,8 @@
 [ext_resource path="res://Tiles/Trees.tres" type="TileSet" id=7]
 [ext_resource path="res://UI/Hepers.gd" type="Script" id=8]
 [ext_resource path="res://UI/UI.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=10]
+[ext_resource path="res://addons/carmel4a97.RTS_Camera2D/RTS-Camera2D.gd" type="Script" id=10]
+[ext_resource path="res://addons/carmel4a97.RTS_Camera2D/node_icon.png" type="Texture" id=11]
 
 [node name="Game" type="Node2D"]
 
@@ -155,6 +156,34 @@ scale = Vector2( 1, 1 )
 
 focus/ignore_mouse = true
 
-[node name="Camera" parent="." instance=ExtResource( 10 )]
+[node name="RTS-Camera2D" type="Camera2D" parent="."]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = false
+drag_margin/v_enabled = false
+smoothing/enable = true
+smoothing/speed = 4.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+script/script = ExtResource( 10 )
+__meta__ = {
+"_editor_icon": ExtResource( 11 )
+}
+key = true
+drag = true
+edge = false
+wheel = true
+zoom_out_limit = 100
+camera_speed = 450
+camera_margin = 50
 
 
