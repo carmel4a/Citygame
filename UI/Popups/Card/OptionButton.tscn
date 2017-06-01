@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://UI/Popups/Card/Cards/_temp/_temp_option.gd" type="Script" id=1]
+
+
+[node name="Button" type="Button"]
+
+visibility/visible = false
+rect/min_size = Vector2( 100, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 100.0
+margin/bottom = 20.0
+toggle_mode = true
+click_on_press = true
+enabled_focus_mode = 2
+shortcut = null
+flat = false
+script/script = ExtResource( 1 )
+
+

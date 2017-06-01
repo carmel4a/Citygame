@@ -1,19 +1,18 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=3 format=1]
 
-[ext_resource path="res://Card/Card.gd" type="Script" id=1]
+[ext_resource path="res://UI/Popups/Card/Card.gd" type="Script" id=1]
 [ext_resource path="res://UI/gui_helper.png" type="Texture" id=2]
-[ext_resource path="res://Card/Cards/_temp/_temp_option.gd" type="Script" id=3]
 
 [node name="Card" type="PanelContainer"]
 
 focus/ignore_mouse = false
-focus/stop_mouse = false
+focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 3
 margin/left = 20.6176
 margin/top = 35.1988
-margin/right = 388.0
-margin/bottom = 326.0
+margin/right = 244.0
+margin/bottom = 286.0
 script/script = ExtResource( 1 )
 
 [node name="Card-Perks" type="HBoxContainer" parent="."]
@@ -24,21 +23,20 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 7.0
 margin/top = 7.0
-margin/right = 361.0
-margin/bottom = 324.0
+margin/right = 217.0
+margin/bottom = 244.0
 alignment = 0
 
 [node name="Top-Bottons" type="VBoxContainer" parent="Card-Perks"]
 
-editor/display_folded = true
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 1
 margin/left = 0.0
-margin/top = 0.0
+margin/top = 40.0
 margin/right = 210.0
-margin/bottom = 317.0
+margin/bottom = 197.0
 alignment = 0
 
 [node name="Top" type="TextureFrame" parent="Card-Perks/Top-Bottons"]
@@ -47,7 +45,7 @@ editor/display_folded = true
 rect/min_size = Vector2( 0, 20 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
-size_flags/horizontal = 2
+size_flags/horizontal = 3
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
@@ -133,7 +131,7 @@ size_flags/vertical = 3
 margin/left = 0.0
 margin/top = 157.0
 margin/right = 210.0
-margin/bottom = 317.0
+margin/bottom = 157.0
 alignment = 0
 
 [node name="ButtonsGroup" type="ButtonGroup" parent="Card-Perks/Top-Bottons/VButtonArray"]
@@ -145,27 +143,8 @@ size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 210.0
-margin/bottom = 160.0
+margin/bottom = 0.0
 alignment = 0
-
-[node name="Button" type="Button" parent="Card-Perks/Top-Bottons/VButtonArray/ButtonsGroup"]
-
-visibility/visible = false
-rect/min_size = Vector2( 100, 0 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 3
-size_flags/vertical = 3
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 100.0
-margin/bottom = 20.0
-toggle_mode = true
-click_on_press = true
-enabled_focus_mode = 2
-shortcut = null
-flat = false
-script/script = ExtResource( 3 )
 
 [connection signal="button_down" from="Card-Perks/Top-Bottons/Top/Close" to="." method="_on_close"]
 

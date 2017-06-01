@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=1]
 
-[ext_resource path="res://Card/Perks.gd" type="Script" id=1]
+[ext_resource path="res://UI/Popups/Card/Perks.gd" type="Script" id=1]
 
 [node name="Perks" type="GridContainer"]
 

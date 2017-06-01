@@ -18,7 +18,7 @@ func _ready():
 	for i in get_children():
 		if i.get_name() == "option":
 			get_node("option").queue_free()
-	_h.set_script(load("res://Card/Cards/"+where+"/"+what+".gd"))
+	_h.set_script(load("res://UI/Popups/Card/Cards/"+where+"/"+what+".gd"))
 	_h.set_name("option")
 	add_child(_h,true)
 	

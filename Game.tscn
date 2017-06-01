@@ -27,6 +27,7 @@ script/script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
+map_size = Vector2( 100, 100 )
 
 [node name="Grass" type="TileMap" parent="Level"]
 

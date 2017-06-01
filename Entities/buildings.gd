@@ -19,7 +19,7 @@ class House:
 			tooltip =\
 			"Population: %d/%d" % [_pop[0],_pop[1]]
 			
-			Global.Game.connect("next_turn",self,"next_turn")
+			Signals.connect("next_turn",self,"next_turn")
 			_done = true
 	
 	func _ready():

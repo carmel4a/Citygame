@@ -1,9 +1,16 @@
 tool
 extends PanelContainer
 
-var dragging = false
-var _prev_pos = Vector2(0,0)
-var _clicked_pt 
+var _dragging = false
+
+onready var panel_size = get_node("Card-Perks/Top-Bottons/Top").get_size()
+onready var _prev_pos = get_pos()
+
+var _OptionButton = preload("res://UI/Popups/Card/OptionButton.tscn")
+var _cardFolder = "res://UI/Popups/Card/"
+onready var _ButtonGroup = get_node("Card-Perks/Top-Bottons/VButtonArray/ButtonsGroup")
+var _clicked_pt
+
 var _content = {\
 	"sys_name":"",
 	"title":"",
@@ -18,31 +25,30 @@ var _content = {\
 		}
 	}
 
-onready var panel_size = get_node("Card-Perks/Top-Bottons/Top").get_size()
 
 func _ready():
 	
 #	save_gd() # Only for debug/editing
 	load_gd(_content["sys_name"])
 	for i in _content["options"]:
-		var _b = get_node("Card-Perks/Top-Bottons/VButtonArray/ButtonsGroup/Button").duplicate()
+		var _b = _OptionButton.instance()
 		_b.set_text(_content["options"][i]["text"])
 		_b.set_tooltip(_content["options"][i]["tooltip"])
 		_b.show()
-		get_node("Card-Perks/Top-Bottons/VButtonArray/ButtonsGroup").add_child(_b)
+		_ButtonGroup.add_child(_b)
 		get_node("Card-Perks/Top-Bottons/Top/Name").set_text(_content["title"])
 		get_node("Card-Perks/Top-Bottons/Text").set_text(_content["text"])
 	set_size(Vector2(200,get_size().y))
-	set_process_input(true)
+	panel_size = get_node("Card-Perks/Top-Bottons/Top").get_size()
 	set_process(true)
-	set_process_unhandled_input(true)
 
 func _process(delta):
 
-	if dragging == true:
-		set_pos(get_global_mouse_pos()-_clicked_pt)
+	if _dragging:
+		# yayayayayayayaya....
+		set_pos(Global.UI.get_local_mouse_pos()-_clicked_pt-get_parent().get_pos())
 		
-func _init(what = null):
+func init(what = null):
 	
 	if what != null:
 		_content["sys_name"] = what
@@ -59,11 +65,11 @@ func save_gd():
 	var file = File.new()
 	var _dir = Directory.new()
 	if _content["sys_name"] != "":
-		_dir.make_dir("res://Card/Cards/"+_content["sys_name"])
-		file.open("res://Card/Cards/"+_content["sys_name"] +"/" +_content["sys_name"]+".json",2)
+		_dir.make_dir(_cardFolder + "Cards/"+_content["sys_name"])
+		file.open(_cardFolder + "Cards/"+_content["sys_name"] +"/" +_content["sys_name"]+".json",2)
 	else:
-		_dir.make_dir("res://Cards/_temp/")
-		file.open("res://Card/Cards/_temp/_temp.json",2)
+		_dir.make_dir(_cardFolder + "/_temp/")
+		file.open(_cardFolder + "_temp/_temp.json",2)
 	file.store_string(_content.to_json())
 	file.close()
 
@@ -71,7 +77,7 @@ func load_gd(name):
 	
 	_content.clear()
 	var file = File.new()
-	file.open("res://Card/Cards/"+name+"/" +name+".json",1)
+	file.open(_cardFolder + "Cards/"+name+"/" +name+".json",1)
 	_content.parse_json(file.get_as_text())
 	file.close()
 	_update()
@@ -85,7 +91,7 @@ func _on_Option_button_selected( button_idx ):
 	for i in get_node("Card-Perks").get_children(): 
 		if i.get_name()=="Perks":
 			get_node("Card-Perks/Perks").free()
-	var _p = preload("res://Card/Perks.tscn").instance()
+	var _p = preload("res://UI/Popups/Card/Perks.tscn").instance()
 	_p.set_name("Perks")
 	_p.init(_content["options"].keys()[button_idx.get_position_in_parent()-1],_content["sys_name"])
 	get_node("Card-Perks").add_child(_p,true)
@@ -93,12 +99,12 @@ func _on_Option_button_selected( button_idx ):
 func _input_event(event):
 	
 	if event.type == InputEvent.MOUSE_BUTTON and event.button_index == 1:
-		if event.is_pressed():
-			if Rect2(Vector2(0,0),panel_size).has_point(event.pos) and dragging == false:
+		if event.pressed:
+			if Rect2(Vector2(0,0),panel_size).has_point(event.pos) and _dragging == false:
 				accept_event()
 				raise()
-				dragging = true
-				_clicked_pt = get_local_mouse_pos()
-		else:
-			dragging = false
-
+				_dragging = true
+				_clicked_pt = panel_size - event.pos
+		if !event.pressed:
+			print("eeebuggg")
+			_dragging = false

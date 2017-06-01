@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://UI/UI.gd" type="Script" id=1]
+[ext_resource path="res://UI/Popups.gd" type="Script" id=2]
 
 [sub_resource type="GDScript" id=1]
 
@@ -56,6 +57,7 @@ __meta__ = {
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 
+editor/display_folded = true
 anchor/left = 1
 anchor/right = 1
 focus/ignore_mouse = false
@@ -98,6 +100,7 @@ max_lines_visible = -1
 
 [node name="VButtonArray" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 3
@@ -105,7 +108,7 @@ size_flags/vertical = 3
 margin/left = 0.0
 margin/top = 18.0
 margin/right = 279.0
-margin/bottom = 92.0
+margin/bottom = 38.0
 alignment = 0
 script/script = SubResource( 2 )
 
@@ -117,9 +120,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 1
 size_flags/vertical = 1
 margin/left = 15.0
-margin/top = 27.0
+margin/top = 0.0
 margin/right = 74.0
-margin/bottom = 47.0
+margin/bottom = 20.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -134,9 +137,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 1
 size_flags/vertical = 1
 margin/left = 114.0
-margin/top = 27.0
+margin/top = 0.0
 margin/right = 164.0
-margin/bottom = 47.0
+margin/bottom = 20.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -151,9 +154,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 1
 size_flags/vertical = 1
 margin/left = 207.0
-margin/top = 27.0
+margin/top = 0.0
 margin/right = 260.0
-margin/bottom = 47.0
+margin/bottom = 20.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -174,6 +177,7 @@ margin/bottom = 92.0
 
 [node name="Alerts" type="ScrollContainer" parent="."]
 
+editor/display_folded = true
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -199,6 +203,7 @@ alignment = 2
 
 [node name="Stats" type="Panel" parent="."]
 
+editor/display_folded = true
 anchor/right = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -263,16 +268,34 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Cards" type="HBoxContainer" parent="."]
+[node name="Popups" type="Control" parent="."]
 
+editor/display_folded = true
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+script/script = ExtResource( 2 )
+
+[node name="Cards" type="HBoxContainer" parent="Popups"]
+
+anchor/top = 3
+anchor/right = 1
+anchor/bottom = 3
 focus/ignore_mouse = true
 focus/stop_mouse = false
 size_flags/horizontal = 0
 size_flags/vertical = 2
-margin/left = 94.0
-margin/top = 160.0
-margin/right = 843.0
-margin/bottom = 256.0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
 custom_constants/separation = 15
 alignment = 1
 

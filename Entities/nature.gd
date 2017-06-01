@@ -61,7 +61,7 @@ Age: %s"""
 		if !Global.Level.content_has(x,y,"Trees"):
 			Global.content(Vector2(x,y)).append({"Trees":self})
 			LevelState.add_cell([[x,y,"Trees",0]])
-			Global.Game.connect("next_turn",self,"next_turn")
+			Signals.connect("next_turn",self,"next_turn")
 			_done = true
 			
 	func _ready():
