@@ -93,6 +93,7 @@ func p_popup_content_menu():
 					if i.values()[0].get("tooltip") != null:
 						Global.HUD.get_node("obj_lst").add_item(i.keys()[0])
 				Global.HUD.get_node("obj_lst").add_item("Range")
+				Global.HUD.get_node("obj_lst").add_item("Res")
 				Global.HUD.get_node("obj_lst").popup()
 			else:
 				Global.HUD.get_node("obj_lst").hide()
@@ -133,14 +134,33 @@ func e_layers():
 
 var _klicked
 func _pass_bbc(i):
-	if Global.HUD.get_node("obj_lst").get_item_text(i)!="Range":
+	
+	if Global.HUD.get_node("obj_lst").get_item_text(i)=="Res":
+		var _p = Global.Helpers.get_range((_klicked/64).floor().x,(_klicked/64).floor().y,4)
+		var wood = 0
+		var __tex = preload("res://UI/map_icons/res.png")
+		for i in _p:
+			if Global.Level.content_has(i.x,i.y,"Trees"):
+				wood += Global.Level.content_get(i.x,i.y,"Trees").wood
+				Global.Helpers.light_static_helper_v2(__tex,Vector2(2,2),i*64)
+		Global.Popups.get_node("tooltip_man").set_text("wood: "+str(wood))
+		Global.Popups.get_node("tooltip_man").set_pos(get_viewport().get_mouse_pos())
+		Global.Popups.get_node("tooltip_man").show()
+	elif Global.HUD.get_node("obj_lst").get_item_text(i)=="Range":
+		var _p = Global.Helpers.get_range((_klicked/64).floor().x,(_klicked/64).floor().y,4)
+#		var __L = Label.new()
+#		__L.set_pos(i*64+Vector2(32,32))
+#		__L.set_text(str(__checked[1][__checked[0].find(i)]))
+#		add_child(__L)
+		var __tex = preload("res://UI/map_icons/res.png")
+		for i in _p:
+			Global.Helpers.light_static_helper_v2(__tex,Vector2(2,2),i*64)
+	else:
 		Global.Popups.get_node("tooltip_man").show()
 		if Global.content((_klicked/64).floor())[i].values()[0].get("tooltip") != null:
 			Global.Popups.get_node("tooltip_man").set_text(Global.content((_klicked/64).floor())[i].values()[0].get("tooltip"))
 			Global.Popups.get_node("tooltip_man").show()
 			Global.Popups.get_node("tooltip_man").set_pos(_lmp)
-	else:
-		Global.Helpers.show_range((_klicked/64).floor().x,(_klicked/64).floor().y)
 
 func _pop_menu_opened():
 	_klicked = _mp

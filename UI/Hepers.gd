@@ -81,21 +81,15 @@ func _process(delta):
 
 var __checked = [[],[]]
 var to_check = [[],[]]
-func show_range(x,y):
+func get_range(x,y,MP):
 	
-	var MP = 4
+	__checked = [[],[]]
 	to_check = [[Vector2(x,y)],[MP]]
 	while !to_check[0].empty():
 		var i = to_check[0][0]
 		_add_checks(i.x,i.y,to_check[1][to_check[0].find(i)])
-	for i in __checked[0]:
-#		var __L = Label.new()
-#		__L.set_pos(i*64+Vector2(32,32))
-#		__L.set_text(str(__checked[1][__checked[0].find(i)]))
-#		add_child(__L)
-		light_static_helper_v2(__tex,Vector2(2,2),i*64)
+	return(__checked[0])
 
-var __tex = preload("res://UI/map_icons/res.png")
 var __dirs=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)]
 func _add_checks(x,y,MP):
 	
