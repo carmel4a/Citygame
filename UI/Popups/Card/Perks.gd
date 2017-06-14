@@ -10,6 +10,7 @@ func init(wt,wr):
 	where = wr
 
 func _ready():
+	
 	for i in range(24):
 		var _c = Control.new()
 		_c.set_custom_minimum_size(Vector2(20,20))
@@ -23,24 +24,31 @@ func _ready():
 	add_child(_h,true)
 	
 	show()
-	
-	
+
 func set_perk(id):
-	var _c = Button.new()
-	_c.set_custom_minimum_size(Vector2(20,20))
-	_c.connect("pressed",self,"pressed",[id])
+	var _c = preload("res://UI/Popups/Card/PerkButton.tscn").instance()
 	get_children()[id].queue_free()
+	_c.init(id)
 	add_child(_c)
 	move_child(get_children()[get_child_count()-1],id-1)
 func pressed(id):
+	Signals.connect("emited",self,"recived")
 	_yielded = get_node("option").call(str("perk_"+str(id)))
 func _unyield():
-	_yielded = _yielded.resume()
+	if _yielded != null:
+		_yielded = _yielded.resume()
 	
 
 func wait_for(s):
-	Signals.connect("emited",self,"recived")
+	
 	waiting = s
 func recived(s):
 	if s == waiting:
 		_unyield()
+
+func end_perk(id):
+	waiting = null
+	_yielded = null
+	if Signals.is_connected("emited",self,"recived"):
+		Signals.disconnect("emited",self,"recived")
+	get_children()[id-1].set_disabled(true)

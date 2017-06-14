@@ -28,13 +28,15 @@ func _process_adding():
 				_update_helper = [false,"",0]
 				set_process(false)
 				set_process_unhandled_input(false)
+				klick=false
 				Global.Level.get_node("Helpers").del_map_helper("adding_helper")
 				Signals.emit("adding_to_map")
 		
-		if klick == "r":
+		elif klick == "r":
 				_update_helper = [false,"",0]
 				set_process(false)
 				set_process_unhandled_input(false)
+				klick=false
 				Global.Level.get_node("Helpers").del_map_helper("adding_helper")
 				Signals.emit("Cancel")
 var klick = false

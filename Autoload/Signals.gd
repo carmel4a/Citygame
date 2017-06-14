@@ -9,4 +9,4 @@ func _ready():
 func emit(n):
 	emit_signal(n)
 	emit_signal("emited",n)
-	
+	print("Signals emitted "+n)
