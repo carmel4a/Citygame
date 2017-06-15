@@ -26,14 +26,19 @@ func _ready():
 	show()
 
 func set_perk(id):
+	
 	var _c = preload("res://UI/Popups/Card/PerkButton.tscn").instance()
 	get_children()[id].queue_free()
 	_c.init(id)
 	add_child(_c)
 	move_child(get_children()[get_child_count()-1],id-1)
+
 func pressed(id):
+	
+	GameState.free_state("popup_content_menu")
 	Signals.connect("emited",self,"recived")
 	_yielded = get_node("option").call(str("perk_"+str(id)))
+
 func _unyield():
 	if _yielded != null:
 		_yielded = _yielded.resume()
@@ -52,3 +57,4 @@ func end_perk(id):
 	if Signals.is_connected("emited",self,"recived"):
 		Signals.disconnect("emited",self,"recived")
 	get_children()[id-1].set_disabled(true)
+	GameState.append_state("popup_content_menu")
