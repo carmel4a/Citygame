@@ -4,7 +4,7 @@ var klick = GameState.klick
 
 func layers():
 	Global.Helpers.delete_light_helpers()
-	var _il = Global.UI.get_node("PanelContainer/VBoxContainer/ItemList")
+	var _il = Global.UI.get_node("right_panel/VBoxContainer/ItemList")
 	_il.show()
 	var _si = _il.get_selected_items()
 	var _msx = Global.Level.map_size.x
@@ -24,4 +24,4 @@ func p_layers():
 func e_layers():
 	print("exit layers")
 	Global.Helpers.delete_light_helpers()
-	Global.UI.get_node("PanelContainer/VBoxContainer/ItemList").hide()
+	Global.UI.get_node("right_panel/VBoxContainer/ItemList").hide()
