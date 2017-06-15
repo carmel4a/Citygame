@@ -1,0 +1,134 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://UI/Popups/InitPopup/InitPopupImage1.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "tool
+extends Node2D
+func init(_):
+	pass
+func _ready():
+	get_node(\"Control\").set_custom_minimum_size(Vector2(get_node(\"Control/VBoxContainer\").get_size().x,0))
+	get_node(\"Control\").set_pos(-get_node(\"Control\").get_size()/2)"
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends Button
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called every time the node is added to the scene.
+	# Initialization here
+	pass
+
+
+func _on_Button_pressed():
+	get_parent().get_parent().queue_free()
+"
+
+[node name="PanelContainer" type="Node2D"]
+
+script/script = SubResource( 1 )
+
+[node name="Control" type="Control" parent="."]
+
+rect/min_size = Vector2( 171, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 569.0
+margin/bottom = 408.0
+
+[node name="Panel" type="Panel" parent="Control"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 5.0
+margin/top = 5.0
+margin/right = 5.0
+margin/bottom = 5.0
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 559.0
+margin/bottom = 185.0
+bbcode/enabled = false
+bbcode/bbcode = "Welcome to my awsome game xDDD
+It's time to do nothint.
+Lol, thats only placeholder.
+Time to Lorem Ipsum:
+or not. random chars ddddddddddddeeeeeeeeeeeekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
+visible_characters = -1
+
+[node name="TextureFrame" type="TextureFrame" parent="Control/VBoxContainer"]
+
+rect/min_size = Vector2( 128, 64 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 189.0
+margin/right = 512.0
+margin/bottom = 445.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="Button" type="Button" parent="Control/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 0
+size_flags/vertical = 2
+margin/left = 257.0
+margin/top = 378.0
+margin/right = 302.0
+margin/bottom = 398.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Start!"
+flat = false
+script/script = SubResource( 2 )
+
+[connection signal="pressed" from="Control/VBoxContainer/Button" to="Control/VBoxContainer/Button" method="_on_Button_pressed"]
+
+

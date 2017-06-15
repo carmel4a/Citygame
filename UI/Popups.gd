@@ -1,7 +1,7 @@
 extends Node
 
 var Popups = {\
-	"Init":preload("res://UI/Popups/Card/Card.tscn"),
+	"Init":preload("res://UI/Popups/InitPopup/InitPopup.tscn"),
 	"NewTurn":preload("res://UI/Popups/Card/Card.tscn"),
 	"Card":preload("res://UI/Popups/Card/Card.tscn"),
 }
