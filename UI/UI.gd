@@ -4,7 +4,7 @@ func _ready():
 	
 	get_node("Stats/NextTurn").connect("pressed",get_node("../../"),"next_turn")
 	update()
-	Global.Popups.create_tooltip("tooltip_auto")
+	Global.Popups.create_tooltip("tooltip_auto",true)
 	Signals.tooltip_ready=true
 	Signals.connect_to_tooltip(get_node("Stats/Pop"),"")
 	Signals.connect_to_tooltip(get_node("Stats/IP"),"")

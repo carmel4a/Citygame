@@ -37,8 +37,9 @@ func generate_popup(what,args = null):
 	add_child(_p,true)
 	return(_p)
 
-func create_tooltip(name, background = true):
+func create_tooltip(name, auto=false, background = true):
 	
 	var _t = tooltip.instance()
 	_t.set_name(name)
+	_t._auto=auto
 	add_child(_t)
