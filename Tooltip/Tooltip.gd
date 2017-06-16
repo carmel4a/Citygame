@@ -14,9 +14,9 @@ func _ready():
 	clear()
 	update()
 	get_node("Timer").set_one_shot(true)
-	get_node("Timer").set_wait_time(0.6)
+	get_node("Timer").set_wait_time(0.5)
 	get_node("Timer").set_one_shot(true)
-	get_node("mouse_exit").set_wait_time(0.6)
+	get_node("mouse_exit").set_wait_time(0.2)
 
 func set_text(s):
 	
@@ -51,6 +51,7 @@ var howered = null
 func _on_hover(obj,tooltip):
 	
 	howered = [obj,tooltip]
+	get_node("mouse_exit").stop()
 	get_node("Timer").stop()
 	get_node("Timer").start()
 
