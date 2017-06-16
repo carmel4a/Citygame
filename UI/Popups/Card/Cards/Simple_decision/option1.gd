@@ -2,8 +2,8 @@ extends Node
 
 func _ready():
 	
-	get_parent().set_perk(3)
-	get_parent().set_perk(1)
+	get_parent().set_perk(3,"i am better. choose me!")
+	get_parent().set_perk(1,"awsome perk")
 
 func perk_1():
 	

@@ -25,7 +25,6 @@ var _content = {\
 		}
 	}
 
-
 func _ready():
 	
 #	save_gd() # Only for debug/editing
@@ -33,7 +32,7 @@ func _ready():
 	for i in _content["options"]:
 		var _b = _OptionButton.instance()
 		_b.set_text(_content["options"][i]["text"])
-		_b.set_tooltip(_content["options"][i]["tooltip"])
+		Signals.connect_to_tooltip(_b,_content["options"][i]["tooltip"])
 		_b.show()
 		_ButtonGroup.add_child(_b)
 		get_node("Card-Perks/Top-Bottons/Top/Name").set_text(_content["title"])
@@ -106,5 +105,4 @@ func _input_event(event):
 				_dragging = true
 				_clicked_pt = panel_size - event.pos
 		if !event.pressed:
-			print("eeebuggg")
 			_dragging = false

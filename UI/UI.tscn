@@ -241,7 +241,7 @@ flat = false
 
 [node name="IP" type="Label" parent="Stats"]
 
-focus/ignore_mouse = true
+focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
@@ -256,7 +256,7 @@ max_lines_visible = -1
 
 [node name="Pop" type="Label" parent="Stats"]
 
-focus/ignore_mouse = true
+focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0

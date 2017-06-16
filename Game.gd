@@ -23,8 +23,6 @@ func _ready():
 
 func new_game():
 	
-	# tooltip_auto means classic tooltip wich shows when mouse's hovering sth.
-	Global.Popups.create_tooltip("tooltip_auto")
 	_random_seed()
 	Global.UI.update()
 	GameState.set_state(["begin"])

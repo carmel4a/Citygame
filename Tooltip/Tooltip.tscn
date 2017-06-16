@@ -4,7 +4,7 @@
 
 [node name="Tooltip" type="Control"]
 
-focus/ignore_mouse = true
+focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 0
@@ -42,5 +42,23 @@ margin/bottom = 0.0
 bbcode/enabled = false
 bbcode/bbcode = "test"
 visible_characters = -1
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="mouse_exit" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_timeout"]
+
+[connection signal="timeout" from="mouse_exit" to="." method="_timeout"]
 
 

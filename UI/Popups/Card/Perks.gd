@@ -25,11 +25,12 @@ func _ready():
 	
 	show()
 
-func set_perk(id):
+func set_perk(id,tooltip):
 	
 	var _c = preload("res://UI/Popups/Card/PerkButton.tscn").instance()
 	get_children()[id].queue_free()
-	_c.init(id)
+	_c.init(id,tooltip)
+	Signals.connect_to_tooltip(_c,_c.tooltip)
 	add_child(_c)
 	move_child(get_children()[get_child_count()-1],id-1)
 
@@ -40,13 +41,14 @@ func pressed(id):
 	_yielded = get_node("option").call(str("perk_"+str(id)))
 
 func _unyield():
+	
 	if _yielded != null:
 		_yielded = _yielded.resume()
-	
 
 func wait_for(s):
 	
 	waiting = s
+
 func recived(s):
 	if s == waiting:
 		_unyield()
