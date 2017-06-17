@@ -1,12 +1,24 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://Tiles/Trees/1.png" type="Texture" id=1]
+[ext_resource path="res://Tiles/Trees/young1.png" type="Texture" id=1]
+[ext_resource path="res://Tiles/Trees/medium1.png" type="Texture" id=2]
+[ext_resource path="res://Tiles/Trees/1.png" type="Texture" id=3]
 
 [node name="Node" type="Node"]
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite0" type="Sprite" parent="."]
 
 texture = ExtResource( 1 )
+offset = Vector2( -5, -5 )
+
+[node name="Sprite1" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+offset = Vector2( -5, -5 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+
+texture = ExtResource( 3 )
 offset = Vector2( -5, -5 )
 
 

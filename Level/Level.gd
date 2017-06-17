@@ -105,3 +105,11 @@ func content_get(x,y,s):
 	for i in _content[x][y]:
 		if i.keys()[0] == s:
 			return(i[i.keys()[0]])
+
+func content_get_id(x,y,s):
+	var iterator = 0
+	for i in _content[x][y]:
+		if i.keys()[0] == s:
+			return(iterator)
+		iterator+=1
+	return (false)

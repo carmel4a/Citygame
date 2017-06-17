@@ -88,7 +88,7 @@ func get_range(x,y,MP):
 	while !to_check[0].empty():
 		var i = to_check[0][0]
 		_add_checks(i.x,i.y,to_check[1][to_check[0].find(i)])
-	return(__checked[0])
+	return(__checked)
 
 var __dirs=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)]
 func _add_checks(x,y,MP):

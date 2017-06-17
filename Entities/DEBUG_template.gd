@@ -13,3 +13,6 @@ class Class:
 			return(true)
 		else:
 			return(false)
+	
+	func _exti_tree():
+		pass

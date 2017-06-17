@@ -46,35 +46,82 @@ class River:
 			return(false)
 
 class Trees:
+	
 	var _done = false
-	var wood = 10
+	var x
+	var y
 	var true_age
 	var age = -1
-	var age_names = ["young","medium","old"]
+	var type
+	var wood = -1
 	var tooltip =\
 """Wood: %d
 Age: %s"""
-	func init(vx, vy, vt = "medium"):
+	
+	# tile, years, max-wood # WHY Array is reversed?? 
+	var types = {\
+	"young":[0,[0,10],5],\
+	"medium":[1,[11,25],10],\
+	"old":[2,[26,26],20],\
+	}
+	# nope, you don't see that mix order dict workaround :<<
+	var t_order = ["young","medium","old"]
+	func init(vx, vy, vt = "medium", vage = null):
 		
-		var x = vx
-		var y = vy
+		x = vx
+		y = vy
+		type = vt
+		if vage != null:
+			vage = age
+		else:
+			age = round(rand_range(types[type][1][0],types[type][1][1]))
 		if !Global.Level.content_has(x,y,"Trees"):
 			Global.content(Vector2(x,y)).append({"Trees":self})
-			LevelState.add_cell([[x,y,"Trees",0]])
+			LevelState.add_cell([[x,y,"Trees",types[type][0]]])
+			Signals.connect("pre_next_turn",self,"pre_next_turn")
 			Signals.connect("next_turn",self,"next_turn")
 			_done = true
-			
+	
 	func _ready():
 		
 		if _done:
-			next_turn()
+			wood = types[type][2]
+			tooltip =\
+			"""Wood: %d
+Age: %s""" % [wood,age]
 			return(true)
 		else:
 			return(false)
+	func pre_next_turn():
+		
+		var rand = randf()
+		if rand >=0.995 and type == "old":
+			_exit_tree()
+		if rand >=0.8 and type == "medium":
+			var dr = [Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)]
+			var randii = randi() % 4
+			if Math._is_on_map(Vector2(x+dr[randii].x,y+dr[randii].y),Global.Level.map_size,1) and\
+			Global.Level.content_has_any(x+dr[randii].x,y+dr[randii].y,\
+			["River","House","Road","Trees"]) == false:
+				Economy.add_entitie("Trees",[x+dr[randii].x,y+dr[randii].y,"young",0])
 	
 	func next_turn():
-		if age != 2:
-			age += 1
+		
+		if wood <= 0:
+			_exit_tree()
+		age += 1
+		if age > types[type][1][1] and type != "old":
+			var act = t_order.find(type)
+			type = t_order[act + 1]
+			LevelState.add_cell([[x,y,"Trees",types[type][0]]])
+			wood = types[type][2]
 		tooltip =\
 		"""Wood: %d
-Age: %s""" % [wood,age_names[age]]
+Age: %s""" % [wood,age]
+
+	func _exit_tree():
+		
+		print("deleting" + str(Vector2(x,y)))
+		LevelState.add_cell([[x,y,"Trees",-1]])
+		Global.content(Vector2(x,y)).remove(Global.Level.content_get_id(x,y,"Trees"))
+		Signals.disconnect("next_turn",self,"next_turn")

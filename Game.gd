@@ -35,6 +35,7 @@ func next_turn():
 	GameState.pop[2] = 0
 	# Here objests should do auto update
 	# Note that object must connect to Game to use that signal
+	Signals.emit("pre_next_turn")
 	Signals.emit("next_turn")
 	Global.Popups.generate_turn_alerts()
 	Global.UI.update()
