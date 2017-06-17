@@ -2,7 +2,6 @@
 
 [ext_resource path="res://UI/Popups/Card/Cards/_temp/_temp_option.gd" type="Script" id=1]
 
-
 [node name="Button" type="Button"]
 
 visibility/visible = false

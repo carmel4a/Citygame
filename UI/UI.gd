@@ -7,7 +7,7 @@ func _ready():
 	Global.Popups.create_tooltip("tooltip_auto",true)
 	Signals.tooltip_ready=true
 	Signals.connect_to_tooltip(get_node("Stats/Pop"),"")
-	Signals.connect_to_tooltip(get_node("Stats/IP"),"")
+	Signals.connect_to_tooltip(get_node("Stats/IP"),"Influence Points: " + str(GameState.Auth[0]))
 	
 func update(what="all"):
 	var _all = false

@@ -4,7 +4,7 @@ class Class:
 	
 	var _done = false
 	
-	func init(xy):
+	func init(x, y, z = ""):
 		_done = true
 
 	func _ready():

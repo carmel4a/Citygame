@@ -1,9 +1,9 @@
 extends Node
 class Road:
 	var _done = false
-	func init(xy):
-		var x = xy[0]
-		var y = xy[1]
+	func init(vx, vy):
+		var x = vx
+		var y = vy
 		if Global.Level.content_has_any(x,y,["Road","Trees","House","River"]) == false:
 			!Global.content(Vector2(x,y)).append({"Road":self})
 			update_road(x,y)

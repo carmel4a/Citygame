@@ -79,12 +79,13 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 559.0
 margin/bottom = 185.0
-bbcode/enabled = false
-bbcode/bbcode = "Welcome to my awsome game xDDD
-It's time to do nothint.
-Lol, thats only placeholder.
+bbcode/enabled = true
+bbcode/bbcode = "Welcome to my game.
+That's only placeholder.
 Time to Lorem Ipsum:
-or not. random chars ddddddddddddeeeeeeeeeeeekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
+[center]
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus nisi sit amet est vestibulum, non dapibus velit pretium. Morbi scelerisque dictum purus, at maximus justo sodales at. Etiam ullamcorper porttitor eros, a aliquam ligula dignissim in. Interdum et malesuada fames ac ante ipsum primis in faucibus. In porta ac augue id mattis. Quisque ultricies est vel nunc congue, nec luctus velit vestibulum. Cras non nulla placerat nulla condimentum sagittis. Pellentesque eleifend posuere dolor eu hendrerit.
+[/center]"
 visible_characters = -1
 
 [node name="TextureFrame" type="TextureFrame" parent="Control/VBoxContainer"]

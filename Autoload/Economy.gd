@@ -6,7 +6,7 @@ func add_entitie(what,args):
 		# Get from script in res://Entities
 		var _e = Global.Entities[what][0].new()
 		var _c = _e.get(what).new()
-		_c.init(args)
+		_c.callv("init",args)
 		if _c._ready():
 			return(true)
 		else:

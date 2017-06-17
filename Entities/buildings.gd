@@ -1,13 +1,14 @@
 extends Node
 
 class House:
-
-	var _done = false
+	var x
+	var y
 	var _pop = [0,0,0]
+	var _done = false
 	var tooltip = "Population: %d/%d" % [0,0]
-	func init(xy):
-		var x = xy[0]
-		var y = xy[1]
+	func init(vx, vy):
+		x = vx
+		y = vy
 		if Global.Level.content_has_any(x,y,["House","Trees","Road","River"]) ==false:
 			Global.content(Vector2(x,y)).append({"House":self})
 			LevelState.add_cell([[x,y,"Items",0]])

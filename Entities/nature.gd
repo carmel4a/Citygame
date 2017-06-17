@@ -3,10 +3,10 @@ extends Node
 class Grass:
 	var _done = false
 	var tooltip = "A Grassland"
-	func init(xy):
+	func init(vx, vy):
 		
-		var x = xy[0]
-		var y = xy[1]
+		var x = vx
+		var y = vy
 		if !Global.Level.content_has(x,y,"Grass"):
 			Global.content(Vector2(x,y)).append({"Grass":self})
 			var _r = randf()
@@ -29,10 +29,10 @@ class Grass:
 
 class River:
 	var _done = false
-	func init(xy):
+	func init(vx, vy):
 		
-		var x = xy[0]
-		var y = xy[1]
+		var x = vx
+		var y = vy
 		if !Global.Level.content_has(x,y,"River"):
 			Global.content(Vector2(x,y)).append({"River":self})
 			LevelState.add_cell([[x,y,"Water",0]])
@@ -54,10 +54,10 @@ class Trees:
 	var tooltip =\
 """Wood: %d
 Age: %s"""
-	func init(xy):
+	func init(vx, vy, vt = "medium"):
 		
-		var x = xy[0]
-		var y = xy[1]
+		var x = vx
+		var y = vy
 		if !Global.Level.content_has(x,y,"Trees"):
 			Global.content(Vector2(x,y)).append({"Trees":self})
 			LevelState.add_cell([[x,y,"Trees",0]])

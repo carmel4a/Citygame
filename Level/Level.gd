@@ -1,5 +1,4 @@
 # Main level node. Load, save, serialize, buffer, generate, ect.
-
 extends Node2D
 
 export (Vector2) var map_size = Vector2(100,100)
