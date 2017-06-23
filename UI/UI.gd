@@ -2,7 +2,7 @@ extends Control
 
 func _ready():
 	
-	get_node("Stats/NextTurn").connect("pressed",get_node("../../"),"next_turn")
+	get_node("Stats/NextTurn").connect("pressed",Global.Game,"next_turn")
 	update()
 	Global.Popups.create_tooltip("tooltip_auto",true)
 	Signals.tooltip_ready=true

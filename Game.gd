@@ -29,6 +29,7 @@ func new_game():
 
 func next_turn():
 	
+	Global.UI.get_node("Stats/NextTurn").set_disabled(true)
 	# Global updates witch NOT depens on other objs/entities,etc.
 	GameState._Turn += 1
 	GameState.Auth[0] += GameState.Auth[1]
@@ -39,6 +40,7 @@ func next_turn():
 	Signals.emit("next_turn")
 	Global.Popups.generate_turn_alerts()
 	Global.UI.update()
+	Global.UI.get_node("Stats/NextTurn").set_disabled(false)
 
 func _random_seed():
 	vseed = randi()

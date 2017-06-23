@@ -93,7 +93,7 @@ func _fixed_process(delta):
 			camera_movement.y -= camera_speed * delta
 	
 	# When RMB is pressed, move camera by difference of mouse position
-	if drag and __rmbk and LevelState._update_helper[0]==false:
+	if drag and __rmbk and !GameState._state.has("adding_to_map"):
 		camera_movement = _prev_mouse_pos - get_viewport().get_mouse_pos()
 	
 	# Update position of the camera.

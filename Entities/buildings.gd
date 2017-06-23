@@ -30,12 +30,6 @@ That house have access to %d wood.""" % [_pop[0],_pop[1],wood]
 	
 	func _ready():
 		
-		print("START DEBUGGING")
-		var _p = Global.Helpers.get_range(x,y,4)
-		print(_p[0])
-		_p[0].remove(0)
-		print(_p[0])
-		print("STOP DEBUGGING")
 		if _done:
 			return(true)
 		else:

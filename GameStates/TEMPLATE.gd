@@ -2,7 +2,7 @@ extends Node
 
 var something = GameState.something # to get something form game state e.g. mouse pos
 
-func NAME(): #setup game state
+func NAME(ini_par): #setup game state
 	pass
 func p_NAME(): # in-game process of game state. Here should be conditions to
 	pass			# quit it by GameState.free_state()

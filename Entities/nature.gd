@@ -121,7 +121,7 @@ Age: %s""" % [wood,age]
 
 	func _exit_tree():
 		
-		print("deleting" + str(Vector2(x,y)))
 		LevelState.add_cell([[x,y,"Trees",-1]])
+#		Global.content(Vector2(x,y)).erase({"Trees":self})
 		Global.content(Vector2(x,y)).remove(Global.Level.content_get_id(x,y,"Trees"))
 		Signals.disconnect("next_turn",self,"next_turn")
