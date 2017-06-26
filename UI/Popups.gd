@@ -4,6 +4,7 @@ var Popups = {\
 	"Init":preload("res://UI/Popups/InitPopup/InitPopup.tscn"),
 	"NewTurn":preload("res://UI/Popups/Card/Card.tscn"),
 	"Card":preload("res://UI/Popups/Card/Card.tscn"),
+	"TurnProcessing":preload("res://UI/Popups/TurnProcessing/TurnProcessing.tscn"),
 }
 
 var AlertButton = preload("res://UI/AlertButton/AlertButton.tscn")

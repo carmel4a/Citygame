@@ -8,6 +8,8 @@ func _ready():
 	Signals.tooltip_ready=true
 	Signals.connect_to_tooltip(get_node("Stats/Pop"),"")
 	Signals.connect_to_tooltip(get_node("Stats/IP"),"Influence Points: " + str(GameState.Auth[0]))
+	Global.Popups.generate_popup("TurnProcessing")
+	Global.Popups.get_node("TurnProcessing").set_pos(get_viewport_rect().size/2-Vector2(125,50))
 	
 func update(what="all"):
 	var _all = false
