@@ -34,9 +34,13 @@ func _on_next_turn():
 	
 	if !threads[0].is_active():
 		threads[0].start(self, "_next_turn", null)
+	else:
+		print("Error: Something went wrong in _on_next_turn in Game.gd")
 
 func _next_turn(data):
 	
+	var _prev_state = GameState._state
+	GameState.idle_state()
 	Global.UI.get_node("Stats/NextTurn").set_disabled(true)
 	Global.Popups.get_node("TurnProcessing").show()
 	# Global updates witch NOT depens on other objs/entities,etc.
@@ -51,8 +55,9 @@ func _next_turn(data):
 	Global.UI.update()
 	Global.UI.get_node("Stats/NextTurn").set_disabled(false)
 	Global.Popups.get_node("TurnProcessing").hide()
+	GameState.set_state(_prev_state)
 	threads[0].wait_to_finish()
-	return
+	return(true)
 
 func _random_seed():
 	

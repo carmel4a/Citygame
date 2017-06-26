@@ -33,6 +33,7 @@ func _ready():
 			_as.add_point(_p,Vector3(x,y,0))
 			if x != 0: _as.connect_points(_p,_p-1)
 			if y != 0: _as.connect_points(_p,_p-map_size.x)
+	# A helper node to load GenMods.
 	var _GenMod = Node.new()
 	_GenMod.set_name("_GenMod")
 	add_child(_GenMod)
@@ -57,7 +58,7 @@ func _ready():
 	# here will be more complex GenMods wich depends
 	# on each other and/or need multiple iterations,
 	# working on threads, etc.
-	_gen_mods([])
+#	_gen_mods([])
 	_GenMod.queue_free()
 
 # A framework func wich allow to direct add cells to multiple TileMaps,

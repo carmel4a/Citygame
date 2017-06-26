@@ -66,7 +66,7 @@ func idle_state():
 	for s in _state:
 		_script_helper.set_script(States[s])
 		_script_helper.call(str("e_"+s))
-	_state = "idle"
+	_state = ["idle"]
 
 var _saved_states = {}
 func save_state(dict):
