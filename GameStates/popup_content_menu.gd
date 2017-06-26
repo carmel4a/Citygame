@@ -52,6 +52,7 @@ func _pass_bbc(id):
 		var _p = Global.Helpers.get_range((_clicked/64).floor().x,(_clicked/64).floor().y,4)
 		var wood = 0
 		var __tex = preload("res://UI/map_icons/res.png")
+		Global.Helpers.delete_light_helpers()
 		for i in _p[0]:
 			if Global.Level.content_has(i.x,i.y,"Trees"):
 				wood += Global.Level.content_get(i.x,i.y,"Trees").wood
@@ -66,6 +67,7 @@ func _pass_bbc(id):
 #		__L.set_text(str(__checked[1][__checked[0].find(i)]))
 #		add_child(__L)
 		var __tex = preload("res://UI/map_icons/res.png")
+		Global.Helpers.delete_light_helpers()
 		for i in _p[0]:
 			Global.Helpers.light_static_helper_v2(__tex,Vector2(2,2),i*64)
 	else:
