@@ -6,6 +6,8 @@ extends Node2D
 # Seed
 export(int) var vseed = -1
 
+var threads = [Thread.new()]
+
 func _enter_tree():
 	
 #	vseed = 1146044083 # to test seeds
@@ -27,7 +29,11 @@ func new_game():
 	Global.UI.update()
 	GameState.set_state(["begin"])
 
-func next_turn():
+func _on_next_turn():
+	
+	threads[0].start(self, "_next_turn", null)
+
+func _next_turn(data):
 	
 	Global.UI.get_node("Stats/NextTurn").set_disabled(true)
 	Global.Popups.get_node("TurnProcessing").show()
@@ -46,5 +52,6 @@ func next_turn():
 	threads[0].wait_to_finish()
 
 func _random_seed():
+	
 	vseed = randi()
 	seed(vseed)
