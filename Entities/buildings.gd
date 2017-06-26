@@ -43,10 +43,9 @@ That house have access to %d wood.""" % [_pop[0],_pop[1],wood]
 		for j in range(_p[0].size()):
 			if _p[1][j] > _min_used and Global.Level.content_has(_p[0][j].x,_p[0][j].y,"Trees"):
 				_tile = _p[0][j]
-		print(_tile)
 		if typeof(_tile) == TYPE_VECTOR2:
 			Global.Level.content_get(_tile.x,_tile.y,"Trees").wood -= 10
-
+		return
 
 	func next_turn():
 		var _r = int(round(rand_range(0,1)))
@@ -69,3 +68,4 @@ That house have access to %d wood.""" % [_pop[0],_pop[1],wood]
 			if Global.Level.content_has(_p[0][i].x,_p[0][i].y,"Trees"):
 				wood += Global.Level.content_get(_p[0][i].x,_p[0][i].y,"Trees").wood
 	#				Global.Helpers.light_static_helper_v2(__tex,Vector2(2,2),i*64)
+		return

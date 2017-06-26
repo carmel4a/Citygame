@@ -104,7 +104,8 @@ Age: %s""" % [wood,age]
 			Global.Level.content_has_any(x+dr[randii].x,y+dr[randii].y,\
 			["River","House","Road","Trees"]) == false:
 				Economy.add_entitie("Trees",[x+dr[randii].x,y+dr[randii].y,"young",0])
-	
+		return
+
 	func next_turn():
 		
 		if wood <= 0:
@@ -118,6 +119,7 @@ Age: %s""" % [wood,age]
 		tooltip =\
 		"""Wood: %d
 Age: %s""" % [wood,age]
+		return
 
 	func _exit_tree():
 		

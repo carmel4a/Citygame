@@ -1,4 +1,5 @@
 # Main level node. Load, save, serialize, buffer, generate, ect.
+
 extends Node2D
 
 export (Vector2) var map_size = Vector2(100,100)
@@ -30,15 +31,12 @@ func _ready():
 			# the first free a* ID starts on 1.
 			var _p = Math._2D_1D(Vector2(x,y),map_size.x)
 			_as.add_point(_p,Vector3(x,y,0))
-			if x != 0:
-				_as.connect_points(_p,_p-1)
-			if y != 0:
-				_as.connect_points(_p,_p-map_size.x)
-	# A heper node to load GenMos.
+			if x != 0: _as.connect_points(_p,_p-1)
+			if y != 0: _as.connect_points(_p,_p-map_size.x)
 	var _GenMod = Node.new()
 	_GenMod.set_name("_GenMod")
 	add_child(_GenMod)
-	# GenMod beafore full map iteration
+	# GenMod before full map iteration
 	# as arg pass an array of arrays:
 	# [name of script, args[]]
 	_gen_mods([\

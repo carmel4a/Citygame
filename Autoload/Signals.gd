@@ -7,10 +7,20 @@ func _ready():
 	add_user_signal("Cancel")
 	add_user_signal("adding_to_map")
 
-func emit(n):
+func _emit_thread(n):
+	
 	emit_signal(n)
 	emit_signal("emited",n)
 	print("Signals emitted "+n)
+	Global.Game.threads[1].wait_to_finish()
+	return
+
+func emit(n):
+	
+	if !Global.Game.threads[1].is_active():
+		call_deferred("emit",n)
+	else:
+		Global.Game.threads[1].start(self,"_emit_thread",n)
 
 var tooltip_ready = false
 func connect_to_tooltip(obj,bbcode):
