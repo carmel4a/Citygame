@@ -103,7 +103,7 @@ Age: %s""" % [wood,age]
 			if Math._is_on_map(Vector2(x+dr[randii].x,y+dr[randii].y),Global.Level.map_size,1) and\
 			Global.Level.content_has_any(x+dr[randii].x,y+dr[randii].y,\
 			["River","House","Road","Trees"]) == false:
-				Economy.add_entitie("Trees",[x+dr[randii].x,y+dr[randii].y,"young",0])
+				Economy.call_deferred("add_entitie","Trees",[x+dr[randii].x,y+dr[randii].y,"young",0])
 		return
 
 	func next_turn():
@@ -126,4 +126,4 @@ Age: %s""" % [wood,age]
 		LevelState.add_cell([[x,y,"Trees",-1]])
 #		Global.content(Vector2(x,y)).erase({"Trees":self})
 		Global.content(Vector2(x,y)).remove(Global.Level.content_get_id(x,y,"Trees"))
-		Signals.disconnect("next_turn",self,"next_turn")
+		Signals.call_deferred("disconnect","next_turn",self,"next_turn")

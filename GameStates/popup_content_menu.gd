@@ -20,7 +20,9 @@ func p_popup_content_menu():
 	click = GameState.klick
 	_lmp = GameState._lmp
 	_mp = GameState._mp
-	if typeof(click[0]) == TYPE_STRING:
+	if typeof(click[0]) == TYPE_STRING and\
+	Global.HUD.has_node("obj_lst") and\
+	Global.Popups.has_node("tooltip_man"):
 		if click[0] == "l" and Math._is_on_map(_mp,Global.Level.map_size,Global.Level.tile_size):
 			if Global.HUD.get_node("obj_lst").is_hidden():
 				Global.HUD.get_node("obj_lst").clear()

@@ -44,7 +44,8 @@ That house have access to %d wood.""" % [_pop[0],_pop[1],wood]
 			if _p[1][j] > _min_used and Global.Level.content_has(_p[0][j].x,_p[0][j].y,"Trees"):
 				_tile = _p[0][j]
 		if typeof(_tile) == TYPE_VECTOR2:
-			Global.Level.content_get(_tile.x,_tile.y,"Trees").wood -= 10
+			if Global.Level.content_has(_tile.x,_tile.y,"Trees"):
+				Global.Level.content_get(_tile.x,_tile.y,"Trees").wood -= 10
 		return
 
 	func next_turn():

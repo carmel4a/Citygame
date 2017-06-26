@@ -7,8 +7,7 @@ extends Node2D
 export(int) var vseed = -1
 
 var _next_turn_thread = Thread.new()
-var _emit = Thread.new()
-var threads = [_next_turn_thread, _emit]
+var threads = [_next_turn_thread]
 func _enter_tree():
 	
 #	vseed = 1146044083 # to test seeds
@@ -49,8 +48,14 @@ func _next_turn(data):
 	GameState.pop[2] = 0
 	# Here objests should do auto update
 	# Note that object must connect to Signals to use that signal
+	while Signals.blocade:
+		continue
 	Signals.emit("pre_next_turn")
+	while Signals.blocade:
+		continue
 	Signals.emit("next_turn")
+	while Signals.blocade:
+		continue
 	Global.Popups.generate_turn_alerts()
 	Global.UI.update()
 	Global.UI.get_node("Stats/NextTurn").set_disabled(false)

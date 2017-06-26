@@ -1,27 +1,29 @@
 extends Node
 
+var blocade = false
+
 func _ready():
 	add_user_signal("emited")
+	add_user_signal("end_queue")
+	
 	add_user_signal("next_turn")
 	add_user_signal("pre_next_turn")
 	add_user_signal("Cancel")
 	add_user_signal("adding_to_map")
 
-func _emit_thread(n):
-	
-	emit_signal(n)
-	emit_signal("emited",n)
-	print("Signals emitted "+n)
-	Global.Game.threads[1].wait_to_finish()
-	return
-
 func emit(n):
 	
-	if !Global.Game.threads[1].is_active():
-		call_deferred("emit",n)
+	if blocade == false:
+		blocade = true
+		emit_signal(n)
+		print("Signals emitted: "+n)
+		blocade = false
+		return(true)
 	else:
-		Global.Game.threads[1].start(self,"_emit_thread",n)
+		return(false)
 
+func _free_blocade():
+	blocade = false
 var tooltip_ready = false
 func connect_to_tooltip(obj,bbcode):
 	if tooltip_ready:
