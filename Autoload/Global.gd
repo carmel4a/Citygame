@@ -6,6 +6,7 @@ onready var UI = get_node("/root/Game/HUD/UI")
 onready var Level = get_node("/root/Game/Level")
 onready var Helpers = get_node("/root/Game/Level/Helpers")
 onready var Popups = get_node("/root/Game/HUD/UI/Popups")
+onready var Map = get_node("/root/Game/Level/Map")
 
 onready var Entities = {\
 "Grass":[preload("res://Entities/nature.gd")],\

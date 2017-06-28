@@ -61,6 +61,7 @@ func _next_turn(data):
 	Global.UI.get_node("Stats/NextTurn").set_disabled(false)
 	Global.Popups.get_node("TurnProcessing").hide()
 	GameState.set_state(_prev_state)
+	Global.Level._map_updaded()
 	threads[0].wait_to_finish()
 	return(true)
 

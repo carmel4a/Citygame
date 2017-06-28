@@ -11,7 +11,7 @@ class House:
 		y = vy
 		if Global.Level.content_has_any(x,y,["House","Trees","Road","River"]) ==false:
 			Global.content(Vector2(x,y)).append({"House":self})
-			LevelState.add_cell([[x,y,"Items",0]])
+			LevelState.add_cell([[x,y,"Items",1]])
 			self._pop = [2,10,1]
 			GameState.pop[0]+=_pop[0]
 			GameState.pop[1]+=_pop[1]

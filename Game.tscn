@@ -1,16 +1,17 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://Level/Level.gd" type="Script" id=2]
 [ext_resource path="res://Tiles/Grass.tres" type="TileSet" id=3]
 [ext_resource path="res://Tiles/Water.tres" type="TileSet" id=4]
 [ext_resource path="res://Tiles/roads.tres" type="TileSet" id=5]
-[ext_resource path="res://Tiles/items.tres" type="TileSet" id=6]
-[ext_resource path="res://Tiles/Trees.tres" type="TileSet" id=7]
-[ext_resource path="res://UI/Helpers.gd" type="Script" id=8]
-[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=9]
-[ext_resource path="res://addons/carmel4a97.RTS_Camera2D/RTS-Camera2D.gd" type="Script" id=10]
-[ext_resource path="res://addons/carmel4a97.RTS_Camera2D/node_icon.png" type="Texture" id=11]
+[ext_resource path="res://Tiles/Trees.tres" type="TileSet" id=6]
+[ext_resource path="res://Tiles/items.tres" type="TileSet" id=7]
+[ext_resource path="res://Level/Map.gd" type="Script" id=8]
+[ext_resource path="res://UI/Helpers.gd" type="Script" id=9]
+[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=10]
+[ext_resource path="res://addons/carmel4a97.RTS_Camera2D/RTS-Camera2D.gd" type="Script" id=11]
+[ext_resource path="res://addons/carmel4a97.RTS_Camera2D/node_icon.png" type="Texture" id=12]
 
 [node name="Game" type="Node2D"]
 
@@ -22,12 +23,30 @@ vseed = -1
 
 [node name="Level" type="Node2D" parent="."]
 
-editor/display_folded = true
 script/script = ExtResource( 2 )
 map_size = Vector2( 100, 100 )
 
-[node name="Grass" type="TileMap" parent="Level"]
+[node name="TileMapsViewport" type="Viewport" parent="Level"]
 
+editor/display_folded = true
+rect = Rect2( 0, 0, 0, 0 )
+own_world = false
+world = null
+transparent_bg = true
+render_target/enabled = true
+render_target/v_flip = false
+render_target/clear_on_new_frame = true
+render_target/filter = false
+render_target/gen_mipmaps = true
+render_target/update_mode = 2
+audio_listener/enable_2d = false
+audio_listener/enable_3d = false
+physics/object_picking = false
+gui/disable_input = false
+
+[node name="Grass" type="TileMap" parent="Level/TileMapsViewport"]
+
+visibility/visible = false
 transform/scale = Vector2( 2, 2 )
 mode = 0
 tile_set = ExtResource( 3 )
@@ -48,8 +67,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Water" type="TileMap" parent="Level"]
+[node name="Water" type="TileMap" parent="Level/TileMapsViewport"]
 
+visibility/visible = false
 transform/scale = Vector2( 2, 2 )
 mode = 0
 tile_set = ExtResource( 4 )
@@ -70,8 +90,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Roads" type="TileMap" parent="Level"]
+[node name="Roads" type="TileMap" parent="Level/TileMapsViewport"]
 
+visibility/visible = false
 transform/scale = Vector2( 2, 2 )
 mode = 0
 tile_set = ExtResource( 5 )
@@ -92,33 +113,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Items" type="TileMap" parent="Level"]
+[node name="Trees" type="TileMap" parent="Level/TileMapsViewport"]
 
+visibility/visible = false
 transform/scale = Vector2( 2, 2 )
 mode = 0
 tile_set = ExtResource( 6 )
-cell/size = Vector2( 32, 32 )
-cell/quadrant_size = 32
-cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-cell/half_offset = 2
-cell/tile_origin = 0
-cell/y_sort = false
-collision/use_kinematic = false
-collision/friction = 1.0
-collision/bounce = 0.0
-collision/layers = 1
-collision/mask = 1
-occluder/light_mask = 1
-tile_data = IntArray( 196621, 4 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Trees" type="TileMap" parent="Level"]
-
-transform/scale = Vector2( 2, 2 )
-mode = 0
-tile_set = ExtResource( 7 )
 cell/size = Vector2( 32, 32 )
 cell/quadrant_size = 42
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -136,9 +136,36 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Helpers" type="Node2D" parent="Level"]
+[node name="Items" type="TileMap" parent="Level/TileMapsViewport"]
+
+visibility/visible = false
+transform/scale = Vector2( 2, 2 )
+mode = 0
+tile_set = ExtResource( 7 )
+cell/size = Vector2( 32, 32 )
+cell/quadrant_size = 32
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 196621, 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Map" type="Node2D" parent="Level"]
 
 script/script = ExtResource( 8 )
+
+[node name="Helpers" type="Node2D" parent="Level"]
+
+script/script = ExtResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -150,9 +177,25 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 
-[node name="UI" parent="HUD" instance=ExtResource( 9 )]
+[node name="UI" parent="HUD" instance=ExtResource( 10 )]
 
 focus/ignore_mouse = true
+
+[node name="Button" type="Button" parent="HUD"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 17.0
+margin/top = 52.0
+margin/right = 80.0
+margin/bottom = 72.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "UPDATE"
+flat = false
 
 [node name="RTS-Camera2D" type="Camera2D" parent="."]
 
@@ -164,24 +207,26 @@ limit/left = -10000000
 limit/top = -10000000
 limit/right = 10000000
 limit/bottom = 10000000
-drag_margin/h_enabled = false
-drag_margin/v_enabled = false
-smoothing/enable = true
-smoothing/speed = 4.0
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
 drag_margin/left = 0.2
 drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
-script/script = ExtResource( 10 )
+script/script = ExtResource( 11 )
 __meta__ = {
-"_editor_icon": ExtResource( 11 )
+"_editor_icon": ExtResource( 12 )
 }
 key = true
 drag = true
 edge = false
 wheel = true
-zoom_out_limit = 100
+zoom_out_limit = 1000
 camera_speed = 450
 camera_margin = 50
+
+[connection signal="pressed" from="HUD/Button" to="Level" method="_map_updaded"]
 
 

@@ -35,7 +35,7 @@ class River:
 		var y = vy
 		if !Global.Level.content_has(x,y,"River"):
 			Global.content(Vector2(x,y)).append({"River":self})
-			LevelState.add_cell([[x,y,"Water",0]])
+			LevelState.add_cell([[x,y,"Water",1]])
 			_done = true
 	
 	func _ready():
@@ -60,9 +60,9 @@ Age: %s"""
 	
 	# tile, years, max-wood # WHY Array is reversed?? 
 	var types = {\
-	"young":[0,[0,10],5],\
-	"medium":[1,[11,25],10],\
-	"old":[2,[26,26],20],\
+	"young":[1,[0,10],5],\
+	"medium":[2,[11,25],10],\
+	"old":[3,[26,26],20],\
 	}
 	# nope, you don't see that mix order dict workaround :<<
 	var t_order = ["young","medium","old"]

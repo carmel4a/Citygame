@@ -20,6 +20,8 @@ var _content = []
 # AStar, created, but not used anywhere yet
 var _as = AStar.new()
 
+onready var tilemaps = get_node("TileMapsViewport")
+
 func _ready():
 	
 	# Make a _content 2D array
@@ -60,14 +62,17 @@ func _ready():
 	# working on threads, etc.
 #	_gen_mods([])
 	_GenMod.queue_free()
-
+#	tilemaps.set_rect(Rect2(Vector2(0,0),Vector2(map_size*tile_size)))
+#	tilemaps.set_render_target_clear_on_new_frame( true )
+	Global.Map._map_updaded()
+	
 # A framework func wich allow to direct add cells to multiple TileMaps,
 # with various types of cells, etc. Data are passed in ar=[tile1[],tile2[]]
 # where tile* is an array [x,y, layer (Level's Tilemap's name as str()), type]
 func _add(c):
 	
 	for i in c:
-		get_node(i[2]).set_cell(i[0],i[1],i[3])
+		tilemaps.get_node(i[2]).set_cell(i[0],i[1],i[3])
 
 # Function to execute a generator module. Note that a class of GenMod doesn't
 # use native _init, class isn't even instanced. 

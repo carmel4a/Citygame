@@ -52,7 +52,7 @@ class Road:
 				_s[3] = true
 		LevelState.add_cell([[x,y,"Roads",6]])
 		if _s[0] or _s[2]:
-			LevelState.add_cell([[x,y,"Roads",0]])
+			LevelState.add_cell([[x,y,"Roads",13]])
 		if _s[1] or _s[3]:
 			LevelState.add_cell([[x,y,"Roads",1]])
 
